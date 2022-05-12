@@ -1,0 +1,99 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+  .errorlist > li {
+    color: red;
+  }
+  .form-group > label{
+    font-weight: bolder;
+  }
+  .fstElement {
+    display: block !important;
+  }
+  .fstResultItem {
+    font-size: 14px !important;
+  }
+  .fstMultipleMode .fstQueryInput {
+    font-size: 14px !important;
+  }
+  .fstChoiceItem {
+    font-size: 14px !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load poll_extras %}
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+{% if request.GET.with == "country" %}
+<h4>Add course with country</h4>
+{% elif request.GET.with == "city" %}
+<h4>Add course with city</h4>
+{% else %}
+<h4>Add course without city/country</h4>
+{% endif %}
+<div class="basic-form">
+  <form action="" method="post" novalidate >
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+      {{ field.label_tag }}
+      {{ field }}
+      {{ field.errors }}
+      {% if field.help_text %}
+      <p class="help">{{ field.help_text|safe }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+    <div class="form-group">
+      <input type="submit" class="btn btn-info" value="Add">
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    if(window.location.search.includes('city')){
+      $("#main-wrapper > div.content-body > div.container-fluid > div > div > div > div > div > form > div:nth-child(6) > label").html("Excluding Countries");
+      $("#main-wrapper > div.content-body > div.container-fluid > div > div > div > div > div > form > div:nth-child(7) > label").html("Excluding Cities");
+    }
+    else if(window.location.search.includes('without')){
+      console.log("....");
+    }else{
+      $("#main-wrapper > div.content-body > div.container-fluid > div > div > div > div > div > form > div:nth-child(7) > label").html("Excluding Countries");
+    }
+    $('.summernote').summernote();
+    $("#id_country").append(new Option("Select Country",""))
+    $.get("{% url 'CountryDetails' %}?q=c", function(data, status){
+      for (let i = 0; i < data.length; i++) {
+        $("#id_country").append(new Option(data[i][1],data[i][0]))
+      }
+    });
+    $("#id_country").change(function(){
+      $("#id_city").append(new Option("Fetching City list....",""))
+      $.get("{% url 'CountryDetails' %}?c="+$("#id_country").val(), function(data, status){
+        console.log(data)
+        $("#id_city").find('option')
+        .remove()
+        .end();
+        for (let i = 0; i < data.length; i++) {
+          $("#id_city").append(new Option(data[i][0],data[i][0]))
+          // console.log(data[i][0])
+        }
+      });
+    })
+  });
+
+</script>
+<script>
+  $(document).ready(function(){
+    $('.multipleSelect').fastselect();
+  });
+</script>
+{% endblock %}

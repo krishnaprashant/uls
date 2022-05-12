@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>uLearn cPanel</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" href="{% static 'cpt/img/favicon.png' %}">
+
+  {% block css %}
+  {% endblock %}
+
+
+
+  <link href="{% static 'quix/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'admin/summernote/summernote-bs4.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'fastselect/fastselect.css' %}">
+  <link rel="stylesheet" href="{% static 'fastselect/fastselect.min.css' %}">
+  <link href="{% static 'quix/css/admin-extra.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--*******************
+  Preloader start
+  ********************-->
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+      </svg>
+    </div>
+  </div>
+  <!--*******************
+  Preloader end
+  ********************-->
+
+
+  <!--**********************************
+  Main wrapper start
+  ***********************************-->
+  <div id="main-wrapper">
+
+    <!--**********************************
+    Nav header start
+    ***********************************-->
+    <div class="nav-header">
+      <div class="brand-logo">
+        <a href="{% url 'AdminHome' %}">
+          <b class="logo-abbr">
+            <!-- <img src="" alt=""> -->
+            <h3 class="text-white">U</h3>
+          </b>
+          <span class="logo-compact">
+            <!-- <img src="" alt=""> -->
+            <h3 class="text-white">U</h3>
+          </span>
+          <span class="brand-title">
+            <!-- <img src="" alt=""> -->
+            <h3 class="text-white">ulearn</h3>
+          </span>
+        </a>
+      </div>
+    </div>
+    <!--**********************************
+    Nav header end
+    ***********************************-->
+
+    <!--**********************************
+    Header start
+    ***********************************-->
+    <div class="header">
+      <div class="header-content clearfix">
+
+        <div class="nav-control">
+          <div class="hamburger">
+            <span class="toggle-icon"><i class="icon-menu"></i></span>
+          </div>
+        </div>
+        <div class="header-left">
+          <div class="input-group icons">
+            <div class="input-group-prepend">
+              <!-- <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i
+              class="mdi mdi-magnify"></i></span>
+            </div> -->
+            <!-- <input type="search" class="form-control" placeholder="Search Dashboard"
+            aria-label="Search Dashboard">
+            <div class="drop-down   d-md-none">
+            <form action="#">
+            <input type="text" class="form-control" placeholder="Search">
+          </form> -->
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <ul class="clearfix">
+        <li class="icons dropdown">
+          <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+            <span class="activity active"></span>
+            <img src="{% static 'quix/images/profile-user.png' %}" height="40" width="40" alt="">
+          </div>
+          <div class="drop-down dropdown-profile   dropdown-menu">
+            <div class="dropdown-content-body">
+              <ul>
+                <li><a href="{% url 'logout' %}"><i class="icon-key"></i>
+                  <span>Logout</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--**********************************
+Header end ti-comment-alt
+***********************************-->
+
+<!--**********************************
+Sidebar start
+***********************************-->
+<div class="nk-sidebar">
+  <div class="nk-nav-scroll">
+    <ul class="metismenu" id="menu">
+      <li class="nav-label">Dashboard</li>
+      <li>
+        <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+          <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+        </a>
+        <ul aria-expanded="false">
+          <li><a href="{% url 'AdminHome' %}">Home</a></li>
+          <!-- <li><a href="{% static 'quix/index-2.html">Home 2</a></li> -->
+        </ul>
+      </li>
+      <li>
+        <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+          <i class="fa fa-rss"></i> <span class="nav-text">Blog</span>
+        </a>
+        <ul aria-expanded="false">
+          <li><a href="{% url 'Blog' %}">Add Blog</a></li>
+          <li><a href="{% url 'ListBlog' %}">Edit Blog</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+          <i class="fa fa-book"></i><span class="nav-text">Courses</span>
+        </a>
+        <ul aria-expanded="false">
+          <li><a href="{% url 'AddCourse' %}">Add Course</a></li>
+          <li><a href="{% url 'cpanel.AddTitle' %}">Add Title</a></li>
+          <li><a href="{% url 'ListCourse' %}">List Course</a></li>
+          <li><a href="{% url 'cpanel.get_enrolled' %}">Enrolled members</a></li>
+        </ul>
+      </li>
+      <li>
+        <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+          <i class="fa fa-book"></i><span class="nav-text">FAQ</span>
+        </a>
+        <ul aria-expanded="false">
+          <li><a href="{% url 'cpanel.AddFaq' %}">Add FAQ</a></li>
+          <li><a href="{% url 'cpanel.EditFaq' %}">Edit FAQ</a></li>                          
+        </ul>
+      </li>
+    <li>
+      <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+        <i class="fa fa-users"></i> <span class="nav-text">Events</span>
+      </a>
+      <ul aria-expanded="false">
+        <li><a href="{% url 'AddEvent' %}">Add Event</a></li>
+        <li><a href="{% url 'ListEvents' %}">Edit Events</a></li>
+      </ul>
+    </li>
+    <li>
+      <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+        <i class="fa fa-graduation-cap"></i> <span class="nav-text">Trainings</span>
+      </a>
+      <ul aria-expanded="false">
+        <li><a href="{% url 'AddTraining' %}">Add Training</a></li>
+        <li><a href="{% url 'ListTrainings' %}">Edit Training</a></li>
+      </ul>
+    </li>
+    <li>
+      <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+        <i class="fa fa-align-left"></i> <span class="nav-text">Content</span>
+      </a>
+      <ul aria-expanded="false">
+        <li><a href="{% url 'cpanel.AddCustomContent' %}">Add</a></li>
+        <li><a href="{% url 'cpanel.EditCustomContent' %}">Edit Content</a></li>
+      </ul>
+    </li>
+    <!-- <li>
+      <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+        <i class="fa fa-code"></i><span class="nav-text">Sections</span>
+      </a>
+      <ul aria-expanded="false">
+        <li><a href="{% url 'cpanel.AddSection' %}">Add Section</a></li>
+        <li><a href="{% url 'cpanel.EditSection' %}">Edit Section</a></li>
+      </ul>
+    </li>
+    <li>
+      <a class="has-arrow" href="{% static 'quix/javascript:void()' %}" aria-expanded="false">
+        <i class="fa fa-align-left"></i><span class="nav-text">Content</span>
+      </a>
+      <ul aria-expanded="false">
+        <li><a href="{% url 'cpanel.AddContent' %}">Add content</a></li>
+        <li><a href="{% url 'cpanel.EditContent' %}">Edit Content</a></li>
+      </ul>
+    </li> -->
+  </ul>
+</div>
+</div>
+<!--**********************************
+Sidebar end
+***********************************-->
+
+<!--**********************************
+Content body start
+***********************************-->
+<div class="content-body">
+  <div class="row page-titles mx-0">
+    <div class="col p-md-0">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+      </ol>
+    </div>
+  </div>
+  <!-- row -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            {% block content %}
+
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--**********************************
+  Content body end
+  ***********************************-->
+
+  <!--**********************************
+  Footer start
+  ***********************************-->
+  <div class="footer">
+
+  </div>
+  <!--**********************************
+  Footer end
+  ***********************************-->
+</div>
+<!--**********************************
+Main wrapper end
+***********************************-->
+
+<!--**********************************
+Scripts
+***********************************-->
+<script src="{% static 'quix/plugins/common/common.min.js' %}"></script>
+<script src="{% static 'quix/js/custom.min.js' %}"></script>
+
+<script src="{% static 'quix/js/settings.js' %}"></script>
+<script src="{% static 'quix/js/gleek.js' %}"></script>
+<script src="{% static 'quix/js/styleSwitcher.js' %}"></script>
+<script src="{% static 'admin/summernote/summernote.min.js' %}"></script>
+<script src="{% static 'fastselect/fastselect.standalone.min.js' %}"></script>
+{% block script %}
+{% endblock %}
+
+</body>
+
+</html>

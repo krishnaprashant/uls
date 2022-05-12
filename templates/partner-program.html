@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="page-title-area page-title-style-three item-bg4 jarallax" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="page-title-content">
+            <h2>Partner Program</h2>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li>Partner Program</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="blog-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Company & Partners</h2>
+        </div>
+        <div class="partner-slides owl-carousel owl-theme">
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/7.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/8.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/9.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/10.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/11.png' %}" alt="image">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/12.png' %}" alt="image">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

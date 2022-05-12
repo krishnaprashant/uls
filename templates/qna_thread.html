@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+  .user-review > img{
+    height: 45px !important;
+    width: 45px !important;
+  }
+  .delete-button{
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #cb5b5b;
+  }
+  .author-profile-title > img{
+    object-fit: cover;
+    object-position: center;
+  }
+  .user-review > img{
+    object-fit: cover;
+    object-position: center;
+  }
+</style>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="page-title-area page-title-style-three item-bg4 jarallax" data-jarallax='{"speed": 0.3}'>
+  <div class="container">
+    <div class="page-title-content">
+      <h2>QnA</h2>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li>QnA</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<section class="pt-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8">
+        {% for msg in messages %}
+        {% if msg.tags == 'success' %}
+        <p class="bg-success text-white p-2">{{msg}}</p>
+        {% else %}
+        <p class="bg-danger text-white p-2">{{msg}}</p>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="courses-details-area pt-30 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="courses-details-desc">
+          <div class="courses-author">
+            <div class="author-profile-header"></div>
+            <div class="author-profile">
+              <div class="author-profile-title">
+                {% if posts.user.profile_pic == "" %}
+                <img src="{% static 'cpt/img/user.png' %}" alt="image">
+                {% else %}
+                <img src="{{posts.user.profile_pic}}" class="shadow-sm rounded-circle" alt="image">
+                {% endif %}
+                <div class="author-profile-title-details d-flex justify-content-between">
+                  <div class="author-profile-details">
+                    <h4>{{posts.user.first_name}}</h4>
+                    <span class="d-block">{{posts.user}}</span>
+                  </div>
+                  <div class="author-profile-raque-profile">
+                    <a href="{% url 'qna_thread' %}?id={{posts.id}}" class="d-inline-block">Read More »</a>
+                  </div>
+                </div>
+              </div>
+              <p>
+                {{posts.post}}
+              </p>
+            </div>
+          </div>
+          <div class="courses-review-comments">
+            <h3>Comments</h3>
+            {% for c in comments %}
+            <div class="user-review">
+              {% if c.user.profile_pic == "" %}
+              <img src="{% static 'cpt/img/user.png' %}" alt="image">
+              {% else %}
+              <img src="{{c.user.profile_pic}}" alt="image">
+              {% endif %}
+              <div class="review-rating">
+                <span class="d-inline-block">{{c.user}}</span>
+                {% if request.user == c.user  %}
+                <span class="d-inline-block">
+                  <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="cmt" value="{{c.id}}">
+                    <button type="submit" class="delete-button">Delete Comment</button>
+                  </form>
+                </span>
+                {% endif %}
+              </div>
+              <p>
+                {{c.comment}}
+              </p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+</section>
+<section class="courses-details-area pt-70 pb-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8">
+        <form action="{% url 'qna_thread' %}?id={{request.GET.id}}" method="post">
+          {% csrf_token %}
+          <div class="form-group pb-3">
+            <label for="comment">Post Your Comment</label>
+            <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-warning">Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

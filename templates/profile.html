@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+  .wrapper {
+    padding: 100px;
+  }
+
+  .image--cover {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px;
+
+    object-fit: cover;
+    object-position: center;
+  }
+  .profile-change{
+    position: absolute;
+    left: 40px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load course_extras %}
+
+<section class="courses-area pt-100 pb-70">
+  <div class="container">
+    <div class="container">
+      <div class="courses-details-header">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="courses-meta">
+              {% for msg in messages %}
+                {% if msg.tags == 'success' %}
+                <p class="bg-success text-white p-2">{{msg}}</p>
+                {% else %}
+                <p class="bg-danger text-white p-2">{{msg}}</p>
+                {% endif %}
+              {% endfor %}
+              <h2>About Me</h2>
+              <ul>
+                <li>
+                  <i class='bx bx-group'></i>
+                  <span>Name</span>
+                  <a href="#">{{user.first_name}} {{user.last_name}}</a>
+                </li>
+                <li>
+                  <i class='bx bx-mail-send'></i>
+                  <span>Email</span>
+                  <a href="#">{{user.email}}</a>
+                </li>
+                <li>
+                  <i class='bx bx-phone-outgoing'></i>
+                  <span>Phone</span>
+                  <a href="#">{{user.phone}}</a>
+                </li>
+                <li>
+                  {% if user.profile_pic == None %}
+                  <img src="{% static 'cpt/img/user.png' %}" alt="image">
+                  {% else %}
+                  <img src="/{{ user.profile_pic }}" alt="" class="image--cover" />
+                  {% endif %}
+                  <span class="profile-change"><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">change</a></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="upload_section collapse" id="collapseExample">
+              <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="formFileSm" class="form-label">Choose a profile pic</label>
+                  <input class="form-control" name="propic" id="formFileSm" type="file">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-9 col-md-12">
+          <div class="courses-details-desc">
+            <h3>I have Enrolled in</h3>
+            <div class="courses-accordion">
+              <ul class="accordion">
+                <li class="accordion-item">
+                  <a class="accordion-title active" href="javascript:void(0)">
+                    <i class='bx bx-chevron-down'></i>
+                    Courses:
+                  </a>
+                  <div class="accordion-content show">
+                    <ul class="courses-lessons">
+                      {{enrollment | listCourse | safe}}
+                    </ul>
+                  </div>
+                </li>
+              </div>
+              <div class="courses-accordion">
+                <ul class="accordion">
+                  <li class="accordion-item">
+                    <a class="accordion-title active" href="javascript:void(0)">
+                      <i class='bx bx-chevron-down'></i>
+                      Training:
+                    </a>
+                    <div class="accordion-content show">
+                      <ul class="courses-lessons">
+                        {% for trainings in training %}
+                        <li class="single-lessons">
+                          <div class="d-md-flex d-lg-flex align-items-center">
+                            <span class="number">{{forloop.counter}}.</span>
+                            <a href="" class="lessons-title">{{trainings.course_name}}</a>
+                            <a href=""><span class="preview">view Details</span></a>
+                          </div>
+                          <div class="lessons-info">
+                            <span class="duration" data-bs-toggle="tooltip" data-placement="top" title="Duration"><i class='bx bx-chalkboard'></i> {{trainings.selecting_category}}</span>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% endblock %}

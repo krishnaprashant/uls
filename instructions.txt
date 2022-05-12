@@ -1,0 +1,22 @@
+title: homepage:
+url: /
+path: templates/index.html
+
+
+title: header/footer:
+url: /
+path: templates/base.html
+
+
+title: contact us:
+url: /
+path: templates/contactus.html
+
+title : course with country/slug
+url : course/<slug>
+path: templates/course-with-country.html
+
+
+title : course without country/slug
+url : course/<slug>
+path: templates/course-with-country.html

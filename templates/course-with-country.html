@@ -1,0 +1,736 @@
+{% extends 'base.html' %}
+
+{% load poll_extras %}
+
+{% block meta_title %}
+{{course.meta_title}}
+{% endblock %}
+{% block meta_keywords %}
+<meta name="keywords" content="{{course.meta_keywords}}">
+{% endblock %}
+{% block meta_description %}
+<meta name="description" content="{{course.meta_description}}">
+{% endblock %}
+{% block css %}
+<style>
+  .inner-pre {
+    font-family: poppins, sans-serif;
+  }
+  .bg-custom-blue {
+    background-color: #7684bd;
+  }
+  .border-color-b{
+    border: 2px solid #7684bd;
+  }
+  .bg-theme-blue{
+    background: #7684bd;
+  }
+  .bg-theme-green{
+    background: #5c9707;
+  }
+  .t-13{
+    top : 13%;
+  }
+  .course-desc > *{
+    color: white;
+  }
+  #csdc > p:nth-child(3){
+    color: white !important;
+  }
+  #csdc > p:nth-child(4){
+    color: white !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="banner-wrapper">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-12">
+        <div id="csdc" class="wrapper-content">
+          <h1>{{course.title}}</h1>
+          <p class="ptb-10 course-desc">{{course.description | setdynamicvalue:country |safe }}</p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="business-banner-image">
+          <img src="{% static 'cpt/img/banner-img4.png' %}" alt="image">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="product-details-area pb-70">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-12 col-md-12">
+        <div class="tab products-details-tab">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <ul class="tabs">
+                <li><a href="#">
+                    <div class=""></div> Course Overview
+                  </a></li>
+                <li><a href="#">
+                    <div class=""></div> Key Features
+                  </a></li>
+                <li>
+                  <a href="#">
+                    <div class=""></div> Syllabus
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class=""></div> What you learn
+                  </a>
+                </li>
+                <li><a href="#">
+                    <div class=""></div> FAQS
+                  </a></li>
+
+              </ul>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="tab-content">
+                <div class="tabs-item">
+                  <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-6">
+                      <div class="products-details-tab-content">
+                        <p class="inner-pre">{{withCountry.0.description | setdynamicvalue:country | safe }} </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <span class="inner-pre">
+                          {{withCountry.0.features | safe}}
+                        </span>
+
+                        <!-- <div class="about-text">
+
+                            <ul class="features-list">
+                              <li><i class='bx bx-check'></i> Activate Listening</li>
+                              <li><i class='bx bx-check'></i> Brilliant minds</li>
+                              <li><i class='bx bx-check'></i> Better. Best. Wow!</li>
+                              <li><i class='bx bx-check'></i> Branding it better!</li>
+                            </ul>
+                          </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <span class="inner-pre">
+                        {{withCountry.0.syllabus | safe}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+                    <div class="about-inner-area1">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                          <span class="inner-pre">
+                            {{withCountry.0.learn | safe}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+                    <div class="faq-accordion">
+                      <ul class="accordion">
+                        {% for FAQ in faq %}
+                        <li class="accordion-item">
+                          <a class="accordion-title active" href="javascript:void(0)">
+                            <i class='bx bx-chevron-down'></i>
+                            {{FAQ.question}}
+                          </a>
+                          <div class="accordion-content show">
+                            <p>{{FAQ.answer}}</p>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+                    <div class="row">
+                      {% for course in courses %}
+                      <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-categories-courses-box mb-30 h-350">
+                          <div class="course-img">
+                            <img src="{{ course.course_picture }}" alt="">
+                          </div>
+                          <h3>{{course.title}}</h3>
+                          <a href="{% url 'get_course_details' %}?id={{course.id}}" class="default-btn">
+                            <span class="label">Select Course</span>
+                          </a>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+                  <div class="products-details-tab-content">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-details-area pb-70">
+  <div class="container">
+    <div class="row align-items-center">
+      {% for courseItems in withCountry %}
+      <form id="EnrollmentForm" action="" method="POST">
+        {% csrf_token %}
+        <div class="col-lg-12 col-md-12 card mt-4 mb-4">
+          <div class="row">
+            <div class="col-lg-6 ps-0">
+              <div class="bg-custom-blue p-2">
+                <h5 class="text-white">{{courseItems.course.title}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center pt-4">
+            <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="row ps-3 pe-3 text-center pt-3 pb-3 me-2 ms-2 ">
+                    <div class="border-bottom">
+                      {{courseItems.scheduled_dates | ExtractMonth }}
+                    </div>
+                    <div class="text-center">
+                      {{courseItems.scheduled_dates | ExtractYear }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="row">
+                    {{courseItems.scheduled_dates | ExtractDates | safe }}
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12 m-3 text-center">
+                      {{courseItems.scheduled_times}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+              <div class="text-center mt-5">
+                <div class="pt-2">
+                  <i class='bx bx-hash'></i> {{courseItems.course_code}}
+                </div>
+                <div class="pt-2">
+                  <i class='bx bx-globe'></i> {{courseItems.course_language}}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+              <div class="input-group mt-5 pt-2">
+                <span class="input-group-btn border-color-b border-end-0">
+                  <button type="button" class="btn btn-default btn-number t-13" disabled="disabled" data-type="minus"
+                    data-field="quant[{{forloop.counter}}]">
+                  <i class='bx bx-minus'></i>
+                  </button>
+                </span>
+                <input type="text" name="quant[{{forloop.counter}}]" class="form-control input-number text-center border-color-b border-start-0" value="1" min="1" max="10">
+                <input type="hidden" name="flc" value="{{forloop.counter}}" />
+                <input type="hidden" name="course_id" value="{{courseItems.id}}" />
+                <input type="hidden" name="quant[{{forloop.counter}}]_amountvalue" value="{{courseItems.course_amount}}" />
+                <input id="course_amount" type="hidden" name="quant[{{forloop.counter}}]_amount" value="{{courseItems.course_amount}}" />
+                <span class="input-group-btn border-color-b border-start-0 bg-theme-blue">
+                  <button type="button" class="btn btn-default btn-number t-13 text-white" data-type="plus" data-field="quant[{{forloop.counter}}]">
+                    <i class='bx bx-plus'></i>
+                  </button>
+                </span>
+                <label for="">Select the number of learners</label>
+              </div>
+            </div>
+            <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1">
+              <div class="mt-5 pt-2">
+                <h5>
+                  {{courseItems.currency | upper}}
+                </h5>
+                <h5 class="course_amount_{{forloop.counter}}">{{courseItems.course_amount}}</h5>
+              </div>
+            </div>
+            <input type="hidden" name="code" value="{{courseItems.course_code}}">
+            <div class="col-lg-2 col-sm-2 col-md-2 col-xs-2">
+              <div class="mt-5 pt-">
+                <button type="submit" class="btn bg-theme-green btn-lg text-white">Enroll Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<section class="pt-70 pb-70 bg-grey">
+  <div class="container">
+    <div class="about-sec">
+      <h2>Training and Cercification Courses for Corporate Enterprise teams​</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua .</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="courses-area pt-100 pb-70">
+  <div class="container">
+    <div class="tab courses-list-tab">
+      <ul class="tabs">
+        <li><a href="#">All Courses</a></li>
+        <li><a href="#">Project Management</a></li>
+        <li><a href="#">Agile & Scrum</a></li>
+        <li><a href="#">IT Service Management</a></li>
+        <li><a href="#">Quality Management</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            {% if trainings.selecting_category == "Project management" %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            {% if trainings.selecting_category == "Agile & Scrum" %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            {% if trainings.selecting_category == "IT Service Management" %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            {% if trainings.selecting_category == "Quality Management" %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="funfacts-and-feedback-area bg-grey ptb-70">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-12">
+        <div class="feedback-slides-content">
+          <h2>Training Delivery Modes</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+          <div class="feedback-slides-two owl-carousel owl-theme">
+            <div class="single-feedback-slides-item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua</p>
+            </div>
+            <div class="single-feedback-slides-item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+            </div>
+            <div class="single-feedback-slides-item">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="funfacts-list">
+          <img src="{% static 'cpt/img/information-img.png' %}" alt="image">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="banner-wrapper ptb-70">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-12">
+        <div class="wrapper-content">
+          <h3>Upskilling Professionals of Leading Organization Worldwide</h3>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="banner-courses-category">
+          <ul>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/TMF-Logo-ENG.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/IBM.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/ValueMomentum-logo.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/Blacknight.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/appswave.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/wavemoney.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/valuelabs.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/Blacknight.png' %}" alt="image">
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="{% static 'cpt/img/partner/ValueMomentum-logo.png' %}" alt="image">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partner-area ptb-70">
+  <div class="container">
+    <div class="section-title">
+      <h2>Trusted by Global Governing Bodies</h2>
+    </div>
+    <div class="partner-slides owl-carousel owl-theme">
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/pmi.png' %}" alt="image">
+        </a>
+      </div>
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/scaledagile.png' %}" alt="image">
+        </a>
+      </div>
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/scrum.png' %}" alt="image">
+        </a>
+      </div>
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/axelos.png' %}" alt="image">
+        </a>
+      </div>
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/peoplecert.png' %}" alt="image">
+        </a>
+      </div>
+      <div class="single-partner-item">
+        <a href="#" class="d-block">
+          <img src="{% static 'cpt/img/partner/exin.png' %}" alt="image">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="faq-area ptb-70">
+  <div class="container">
+    <div class="tab faq-accordion-tab">
+      <ul class="tabs d-flex flex-wrap justify-content-center">
+        <li><a href="#"><span>Course Specific FAQS</span></a></li>
+        <li><a href="#"><span>General FAQs</span></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tabs-item">
+          <div class="faq-accordion">
+            <ul class="accordion">
+              <li class="accordion-item">
+                <a class="accordion-title active" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What’s the difference between a college and a university?
+                </a>
+                <div class="accordion-content show">
+                  <p>Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but
+                    the terms are often used interchangeably.</p>
+                </div>
+              </li>
+              <li class="accordion-item">
+                <a class="accordion-title" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What are the different types of undergraduate degrees?
+                </a>
+                <div class="accordion-content">
+                  <p>Associate: a two-year program that either leads to a specific vocation or transitions to a bachelor
+                    program. Bachelor: a four or five-year program where students earn credits in a wide variety of
+                    courses.</p>
+                </div>
+              </li>
+              <li class="accordion-item">
+                <a class="accordion-title" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What are the different types of graduate degrees?
+                </a>
+                <div class="accordion-content">
+                  <p>Masters: two-year degree providing additional specialization. Doctorate: five to eight-year program
+                    certifying the student as a trained research scholar and/or professor.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tabs-item">
+          <div class="faq-accordion">
+            <ul class="accordion">
+              <li class="accordion-item">
+                <a class="accordion-title active" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What’s the difference between a college and a university?
+                </a>
+                <div class="accordion-content show">
+                  <p>Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but
+                    the terms are often used interchangeably.</p>
+                </div>
+              </li>
+              <li class="accordion-item">
+                <a class="accordion-title" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What are the different types of undergraduate degrees?
+                </a>
+                <div class="accordion-content">
+                  <p>Associate: a two-year program that either leads to a specific vocation or transitions to a bachelor
+                    program. Bachelor: a four or five-year program where students earn credits in a wide variety of
+                    courses.</p>
+                </div>
+              </li>
+              <li class="accordion-item">
+                <a class="accordion-title" href="javascript:void(0)">
+                  <i class='bx bx-chevron-down'></i>
+                  What are the different types of graduate degrees?
+                </a>
+                <div class="accordion-content">
+                  <p>Masters: two-year degree providing additional specialization. Doctorate: five to eight-year program
+                    certifying the student as a trained research scholar and/or professor.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+    $('.btn-number').click(function (e) {
+
+    e.preventDefault();
+
+    fieldName = $(this).attr('data-field');
+    type = $(this).attr('data-type');
+    var input = $("input[name='" + fieldName + "']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+      if (type == 'minus') {
+
+        if (currentVal > input.attr('min')) {
+          input.val(currentVal - 1).change();
+        }
+        if (parseInt(input.val()) == input.attr('min')) {
+          $(this).attr('disabled', true);
+        }
+
+      } else if (type == 'plus') {
+
+        if (currentVal < input.attr('max')) {
+          input.val(currentVal + 1).change(); } if (parseInt(input.val()) == input.attr('max')) { $(this).attr('disabled', true);
+        }
+      }
+    } else { input.val(0); }
+  });
+   $('.input-number').focusin(function () {
+    $(this).data('oldValue', $(this).val());
+  });
+  $('.input-number').change(function () {
+    minValue = parseInt($(this).attr('min'));
+    maxValue = parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    name = $(this).attr('name'); if (valueCurrent >= minValue) {
+      $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+    } else {
+      alert('Sorry, the minimum value was reached');
+      $(this).val($(this).data('oldValue'));
+    }
+    changeAmountValue(valueCurrent,name);
+    if (valueCurrent <= maxValue) { $(".btn-number[data-type='plus' ][data-field='" + name + "' ]").removeAttr('disabled') }
+    else { alert('Sorry, the maximum value was reached'); $(this).val($(this).data('oldValue')); }
+  });
+  $(".input-number").keydown(function (e) {
+      // Allow: backspace, delete, tab, escape, enter and .
+      if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+        // Allow: Ctrl+A
+        (e.keyCode == 65 && e.ctrlKey === true) ||
+        // Allow: home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        // let it happen, don't do anything
+        return;
+      }
+      // Ensure that it is a number and stop the keypress
+      if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+      }
+    });
+     function removeExtra(txt){
+       a = txt.replace("quant", "");
+       b = a.replace("[", "");
+       c = b.replace("]", "");
+       return c;
+     }
+     function changeAmountValue(cv,name) {
+       console.log(cv)
+        a = $('input[name="'+name+'"]').val();
+        b = $('input[name="' + name + '_amount"]');
+        c =  $('input[name="' + name + '_amountvalue"]').val();
+        total = c * a;
+        b.val(total);
+        flc = removeExtra(name);
+        $(".course_amount_"+flc).html(total)
+        console.log("input value: "+a+"\nCourse Amount: "+c+"\ntotal: "+c * a)
+    }
+    $(document).ready(function () {
+        $("#csdc > p > font").attr("color", "white");
+    });
+    $(document).ready(function () {
+        $("#csdc > p > span").css("color", "white");
+    });
+</script>
+
+{% endblock %}

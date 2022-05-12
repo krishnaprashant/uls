@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+
+
+  <section class="courses-area pt-100 pb-70">
+    <div class="container">
+      <div class="courses-topbar">
+        <div class="row align-items-center">
+          <div class="col-lg-4 col-md-4">
+            <div class="topbar-result-count">
+              <p>Showing 1 – 6 of 54</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-9 col-md-12">
+          <div class="row">
+            <div class="tab courses-list-tab">
+              <div class="tab-content">
+                <div class="tabs-item">
+                  <div class="row">
+                    {% if not course %}
+                      <h4>No matching results found</h4>
+                    {% endif %}
+                    {% for courses in course %}
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                      <div class="single-categories-courses-box mb-30">
+                        <div class="course-img">
+                          <img src="{{courses.course_picture}}" alt="">
+                        </div>
+                        <h3>{{courses.title}}</h3>
+                        <br/>
+                        <a href="#" class="default-btn">
+                          <span class="label">Select Cource</span>
+                        </a>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="pagination-area text-center">
+                <span class="page-numbers current" aria-current="page">1</span>
+                <a href="#" class="page-numbers">2</a>
+                <a href="#" class="page-numbers">3</a>
+                <a href="#" class="page-numbers">4</a>
+                <a href="#" class="page-numbers">5</a>
+                <a href="#" class="next page-numbers"><i class='bx bx-chevron-right'></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

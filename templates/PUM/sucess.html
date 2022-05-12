@@ -1,0 +1,16 @@
+<html>
+<body>
+<div style="display:none">
+   	<input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+</div>
+<h4>Thank You.</h4>
+<h4>Your order status is {{ status }}</h4>
+<h4>Your Transaction ID for this transaction is {{ txnid }}</h4>
+<h4>We have received a payment of Rs {{ amount}}</h4>
+<h4>mobile {{ mobile }}</h4>
+<h4>info  {{ productinfo }}</h4>
+<h4>training id {{request.session.training_id}}</h4>
+<h4>Course id {{ request.session.course_id }}</h4>
+
+</body>
+</html>

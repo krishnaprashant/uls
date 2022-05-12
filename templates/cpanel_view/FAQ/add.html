@@ -1,0 +1,53 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+{% if 'update' in request.get_full_path %}
+<h4 class="card-title">Update FAQ</h4>
+{% else %}
+<h4 class="card-title">Add FAQ</h4>
+{% endif %}
+<div class="basic-form">
+  <form action="" method="post" novalidate >
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+          {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+      </div>
+      {% endfor %}
+      {% if 'update' in request.get_full_path %}
+      <div class="form-group">
+          <input type="submit" class="btn btn-info" value="Update">
+      </div>
+      {% else %}
+      <div class="form-group">
+          <input type="submit" class="btn btn-info" value="Add">
+      </div>
+      {% endif %}
+  </form>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#summernote').summernote();
+  });
+</script>
+{% endblock %}

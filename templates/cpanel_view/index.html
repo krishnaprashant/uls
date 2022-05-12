@@ -1,0 +1,113 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center">
+          <h3>Courses</h3>
+          <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
+          <h2 class="mt-3">{{total.count}}</h2>
+          <p>Members enrolled</p>
+          <a href="{% url 'cpanel.get_enrolled' %}" class="btn gradient-4 btn-lg border-0 btn-rounded px-5">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center">
+          <h3>Trainings</h3>
+          <span class="display-5"><i class="icon-user gradient-4-text"></i></span>
+          <h2 class="mt-3">{{total.count}}</h2>
+          <p>Members enrolled</p>
+          <a href="{% url 'cpanel.get_enrolled' %}" class="btn gradient-4 btn-lg border-0 btn-rounded px-5">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h4 class="d-inline">Admin Operations</h4>
+      <p>Choose the below options.</p>
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card text-left">
+            <div class="card-body">
+              <h5 class="card-title">Add Blog</h5>
+              <p class="card-text">Add course by adding the content to the database.</p><a href="{% url 'Blog' %}" class="btn btn-primary">Go to Add Blog</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">List Blog</h5>
+              <p class="card-text">Edit course by updating the content to the database.</p><a href="{% url 'ListBlog' %}" class="btn btn-primary">Go to Update Blog</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-left">
+            <div class="card-body">
+              <h5 class="card-title">Add Course</h5>
+              <p class="card-text">Add course by adding the content to the database.</p><a href="{% url 'AddCourse' %}" class="btn btn-primary">Go to Add Course</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">List Course</h5>
+              <p class="card-text">Edit course by updating the content to the database.</p><a href="{% url 'ListCourse' %}" class="btn btn-primary">Go to Update Course</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-left">
+            <div class="card-body">
+              <h5 class="card-title">Add Event</h5>
+              <p class="card-text">Add course by adding the content to the database.</p><a href="{% url 'AddEvent' %}" class="btn btn-primary">Go to Add Event</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">List Event</h5>
+              <p class="card-text">Edit course by updating the content to the database.</p><a href="{% url 'ListEvents' %}" class="btn btn-primary">Go to Update Events</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Add Trainings</h5>
+              <p class="card-text">Edit course by updating the content to the database.</p><a href="{% url 'AddTraining' %}" class="btn btn-primary">Go to Add Training</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">List Trainings</h5>
+              <p class="card-text">Edit course by updating the content to the database.</p><a href="{% url 'ListTrainings' %}" class="btn btn-primary">Go to Update Trainings</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Col -->
+    </div>
+  </div>
+  {% endblock %}

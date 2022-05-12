@@ -1,0 +1,20 @@
+.h-350{
+  height: 350px
+}
+.h-250-w-auto{
+  height: 250px;
+  width: auto;
+}
+.wrap-text{
+  white-space: nowrap;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.max-content{
+    width: max-content !important;
+}
+.nice-select > ul{
+  height: 100px;
+  overflow: scroll !important;
+}

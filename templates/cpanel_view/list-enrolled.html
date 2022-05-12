@@ -1,0 +1,55 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+<!--**********************************
+Content body start
+***********************************-->
+
+
+
+<h4 class="card-title">Enrolled member with course</h4>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered zero-configuration">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Course</th>
+        <th>Date enrolled</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for enrollment in enrolled %}
+      <tr>
+        <td>{{enrollment.user}}</td>
+        <td>{{enrollment.course}}</td>
+        <td>{{enrollment.date_enrolled}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>User</th>
+        <th>Course</th>
+        <th>Date enrolled</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<!-- #/ container -->
+<!--**********************************
+Content body end
+***********************************-->
+{% endblock %}
+
+{% block script %}
+{% endblock %}

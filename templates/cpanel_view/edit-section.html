@@ -1,0 +1,84 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+{% for msg in messages %}
+   {% if msg.tags == 'success' %}
+   <p class="bg-success text-white p-2">{{msg}}</p>
+   {% else %}
+   <p class="bg-danger text-white p-2">{{msg}}</p>
+   {% endif %}
+{% endfor %}
+
+
+<h3>Content</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered zero-configuration">
+    <thead>
+      <tr>
+        <th>Section Id</th>
+        <th>Content Id</th>
+        <th>Location</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in section %}
+      <tr>
+        <td>{{s.id}}</td>
+        <td>{{s.content_id}}</td>
+        <td><div>{{s.location}}</div></td>
+        <td><a href="{% url 'cpanel.UpdateSection' %}?id={{s.id}}">update</a></td>
+        <td><a href="javascript:void(0)" onclick="deleteCourse('{% url 'cpanel.DeleteSection' %}?id={{s.id}}')">delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Section Id</th>
+        <th>Content Id</th>
+        <th>Location</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+{% endblock %}
+{% block script %}
+
+<script src="{% static 'admin/sweet/sweetalert/dist/sweetalert.min.js' %}"></script>
+
+<script type="text/javascript">
+  function deleteCourse(url) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Content details",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your Content has been deleted!", {
+          icon: "success",
+        });
+        setTimeout(function(){
+          window.location.href = url;
+        },2000);
+      } else {
+        swal("Your Contentis safe!");
+      }
+    });
+  }
+  </script>
+{% endblock %}

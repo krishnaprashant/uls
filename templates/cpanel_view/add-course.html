@@ -1,0 +1,186 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+
+<h1>Add Course</h1>
+<div class="basic-form">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Select category</label>
+      <select class="form-control" id="sel1" name="category">
+        <option value="">Select category</option>
+        <option>Project management</option>
+        <option>Agile & Scrum</option>
+        <option>IT Service Management</option>
+        <option>Quality Management</option>
+      </select>
+      {% if form.is_valid == False%}
+      {% if form.category.errors %}
+      <span class="helper-text">{{ form.category.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <select class="form-control" id="sel2" name="title">
+        <option selected value="">Select Title</option>
+      </select>
+      {% if form.is_valid == False%}
+      {% if form.title.errors %}
+      <span class="helper-text">{{ form.title.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Slug</label>
+      <select class="form-control" id="sel3" name="slug">
+        <option selected value="">Select slug</option>
+      </select>
+      {% if form.is_valid == False%}
+      {% if form.slug.errors %}
+      <span class="helper-text">{{ form.slug.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>    
+    <div class="basic-form">
+      <div class="form-group">
+        <label>Course Picture</label>
+        <input type="file" name="course_picture" value="{% if form.is_valid == False %}{{form.course_picture.value }}{% endif %}" class="form-control-file" placeholder="course_picture" />
+        {% if form.is_valid == False%}
+        {% if form.course_picture.errors %}
+        <span class="helper-text">{{ form.course_picture.errors }}</span>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="form-group">
+      <label>H1 Name</label>
+      <input type="text" name="h1_name" class="form-control" value="{% if form.is_valid == False %}{{form.h1_name.value }}{% endif %}" placeholder="h1 name" id="" />
+      {% if form.is_valid == False%}
+      {% if form.h1_name.errors %}
+      <span class="helper-text">{{ form.h1_name.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Fee</label>
+      <input type="text" name="fee" class="form-control" value="{% if form.is_valid == False %}{{form.fee.value }}{% endif %}" placeholder="Fee" id="" />
+      {% if form.is_valid == False%}
+      {% if form.fee.errors %}
+      <span class="helper-text">{{ form.fee.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea name="description" class="form-control summernote" placeholder="description" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.description.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.description.errors %}
+      <span class="helper-text">{{ form.description.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Key Features</label>
+      <textarea name="key_features" class="form-control summernote" placeholder="key_features" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.key_features.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.key_features.errors %}
+      <span class="helper-text">{{ form.key_features.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>What you will learn</label>
+      <textarea name="what_you_learn" class="form-control summernote" placeholder="what_you_learn" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.what_you_learn.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.what_you_learn.errors %}
+      <span class="helper-text">{{ form.what_you_learn.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Course Syllabus</label>
+      <textarea name="course_syllabus" class="form-control summernote" placeholder="course_syllabus" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.course_syllabus.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.course_syllabus.errors %}
+      <span class="helper-text">{{ form.course_syllabus.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Meta Title</label>
+      <textarea name="meta_title" class="form-control" placeholder="meta_title" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.meta_title.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_title.errors %}
+      <span class="helper-text">{{ form.meta_title.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Meta Description</label>
+      <textarea name="meta_description" class="form-control" placeholder="meta_description" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.meta_description.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_description.errors %}
+      <span class="helper-text">{{ form.meta_description.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label>Meta Keywords</label>
+      <textarea name="meta_keywords" class="form-control" placeholder="meta_keywords" id="" cols="30" rows="10">{% if form.is_valid == False %}{{form.meta_keywords.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_keywords.errors %}
+      <span class="helper-text">{{ form.meta_keywords.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="col-auto my-1">
+      <div class="custom-control custom-checkbox mr-sm-2"></div>
+      <input class="custom-control-input" type="checkbox" placeholder="mark_popular" name="mark_popular" id="mark_popular"></input>
+      <label class="custom-control-label" for="mark_popular">Mark as popular</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-dark mb-2" type="submit">Post</button>
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.summernote').summernote();
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {    
+      $("#sel1").change(function(){
+        $("#sel2").children().remove().end();
+        $("#sel3").children().remove().end();
+            var encoded = encodeURIComponent($(this).val());            
+            $.get("{% url 'home.getTitleDetails' %}?cat="+encoded, function (data, status) {              
+                Object.keys(data).forEach(function (k) {
+                  $("#sel2").append('<option selected value="' + data[k]['title'] +'">'+ data[k]['title'] +'</option>');
+                  $("#sel3").append('<option selected value="' + data[k]['slug'] +'">'+ data[k]['slug'] +'</option>');
+                });
+                if (data.length == 0) {
+                  $("#sel2").append('<option selected value="">Select Title</option>');
+                  $("#sel3").append('<option selected value="">Select slug</option>');
+                }
+            });
+      });
+    });
+</script>
+{% endblock %}

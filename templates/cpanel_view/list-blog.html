@@ -1,0 +1,80 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<h3>Blogs</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered zero-configuration">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Picture</th>
+        <th>Slug</th>
+        <th>Body</th>
+        <th>Popular</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for blog in blogs%}
+      <tr>
+        <td>{{blog.title}}</td>
+        <td><img class="web-small" src="{{blog.blog_picture}}" alt=""></td>
+        <td>{{blog.slug}}</td>
+        <td><div class="wrap-text">{{blog.body}}</div></td>
+        <td>{{blog.mark_popular}}</td>
+        <td><a href="{% url 'UpdateBlogForm' %}?id={{blog.id}}">update</a></td>
+        <td><a href="javascript:void(0)" onclick="deleteCourse('{% url 'DeleteBlog' %}?id={{blog.id}}')">delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Title</th>
+        <th>Picture</th>
+        <th>Slug</th>
+        <th>Body</th>
+        <th>Popular</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+{% endblock %}
+{% block script %}
+
+<script src="{% static 'admin/sweet/sweetalert/dist/sweetalert.min.js' %}"></script>
+
+<script type="text/javascript">
+  function deleteCourse(url) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Blog details",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your Blog has been deleted!", {
+          icon: "success",
+        });
+        setTimeout(function(){
+          window.location.href = url;
+        },2000);
+      } else {
+        swal("Your Blog is safe!");
+      }
+    });
+  }
+  </script>
+{% endblock %}

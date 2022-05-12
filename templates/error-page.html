@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="blog-area pt-100 pb-70">
+    <div class="container">
+        
+        <div class="about-inner-area">
+            <div class="row">                
+                <div class="col-lg-12">
+                    <div class="about-text">
+                        <h3>Oops!!!</h3>
+                        <p>We are sorry for inconvinence. We have saved the details of the current issue please. Please note below ticket number. You can mention the below ticket to refer the cause.</p>
+                        <p>Ticket: {{ticket}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

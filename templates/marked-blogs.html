@@ -1,0 +1,5 @@
+<h3>Marked blogs</h3>
+{% for blog in blogs%}
+        <div class="">{{blog.title}}</div>
+        <div class="web-small"><img src="/{{blog.blog_picture}}" alt=""></div>
+{% endfor %}

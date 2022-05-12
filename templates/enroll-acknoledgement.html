@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="courses-area pt-100 pb-70">
+  <div class="container">
+  {% if already %}
+  <div class="row align-items-center alert alert-info">
+      <h4>You have already enrolled to this course.</h4>
+  </div>
+  {% else %}
+    <div class="row align-items-center alert alert-success">
+        <h4>Successfully registered. below are the enrollment details</h4>
+    </div>
+  {% endif %}
+  </div>
+  <div class="container">
+    <div class="courses-details-header">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="courses-meta">
+            {% if not already %}
+            <h2>Enrollment Details</h2>
+            {% endif %}
+            {% for e in enrollment %}
+            <ul>
+              <li>
+                <i class='bx bx-group'></i>
+                <span>Name</span>
+                <a href="#">{{e.user.first_name}} {{e.user.last_name}}</a>
+              </li>
+              <li>
+                <i class='bx bx-mail-send'></i>
+                <span>Email</span>
+                <a href="#">{{e.user.email}}</a>
+              </li>
+              <li>
+                <i class='bx bx-phone-outgoing'></i>
+                <span>Phone</span>
+                <a href="#">{{e.user.phone}}</a>
+              </li>
+              {% if type == "course" %}
+              <li>
+                <i class='bx bx-book-reader'></i>
+                <span>Course</span>
+                <a href="#">{{e.course.title}}</a>
+              </li>
+              <li>
+                <i class='bx bx-cabinet'></i>
+                <span>Catogory</span>
+                <a href="#">{{e.course.category}}</a>
+              </li>
+              {% else %}
+              <li>
+                <i class='bx bx-book-reader'></i>
+                <span>Course</span>
+                <a href="#">{{e.training.course_name}}</a>
+              </li>
+              <li>
+                <i class='bx bx-cabinet'></i>
+                <span>Catogory</span>
+                <a href="#">{{e.training.course_type}}</a>
+              </li>
+              {% endif %}
+            </ul>
+            <br>
+            {% if type == "course" %}
+            <h2>What you will learn</h2>
+            <p>
+              {{e.course.what_you_learn}}
+            </p>
+            {% else %}
+            <h2>What you will learn</h2>
+            <p>
+              {{e.training.what_you_learn}}
+            </p>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-lg-4 mt-5">
+          <a href="{% url 'course' %}" class="btn btn-primary"  name="button">View Courses</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

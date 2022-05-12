@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ULearnSystems</title>
+  <link rel="icon" type="image/png" href="{% static 'cpt/img/favicon.png' %}">
+  {{content | safe }}
+  <link rel="stylesheet" href="{% static 'cpt/css/bootstrap..min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/boxicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/odometer.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/meanmenu.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/nice-select.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/viewer.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/slick.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/magnific-popup.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/responsive.css' %}">
+  <style>
+    .helper-text>ul>li{
+      color: red;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="register-area">
+    <div class="row m-0">
+      <div class="col-lg-6 col-md-12 p-0">
+        <div class="register-image">
+          <img src="{% static 'cpt/img/register-bg.jpg' %}" alt="image">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 p-0">
+        <div class="register-content">
+          <div class="d-table">
+            <div class="d-table-cell">
+              <div class="register-form">
+                <div class="logo">
+                  <a href="{% url 'homepage' %}">
+                    <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+                  </a>
+                </div>
+                <h3>Open up your ULearnSystems Account now</h3>
+                <p>Already signed up? <a class="text-primary" href="{% url 'login' %}">Log in</a></p>
+                {% for msg in messages %}
+                   <p class="text-success">{{msg}}</p>
+                {% endfor %}
+                <form action="{{register}}" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" name="firstname" id="first_name" placeholder="Your first name" value="{% if form.is_valid == False %}{{form.firstname.value }}{% endif %}" class="form-control" />
+                    {% if form.is_valid == False%}
+                    {% if form.firstname.errors %}
+                    <span class="helper-text">{{ form.firstname.errors }}</span>
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="lastname" value="{% if form.is_valid == False %}{{form.lastname.value }}{% endif %}" id="last_name" placeholder="Your last name" class="form-control">
+                    {% if form.is_valid == False%}
+                    {% if form.lastname.errors %}
+                    <span class="helper-text">{{ form.lastname.errors }}</span>
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <input type="email" name="email" value="{% if form.is_valid == False %}{{form.email.value }}{% endif %}" id="email" placeholder="Your email" class="form-control">
+                    {% if form.is_valid == False%}
+                    {% if form.email.errors %}
+                    <span class="helper-text">{{ form.email.errors }}</span>
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <input type="tel" name="phone" value="{% if form.is_valid == False %}{{form.phone.value }}{% endif %}" id="phone" placeholder="Your phone" class="form-control">
+                    {% if form.is_valid == False%}
+                    {% if form.phone.errors %}
+                    <span class="helper-text">{{ form.phone.errors }}</span>
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" value="{% if form.is_valid == False %}{{form.password.value }}{% endif %}" id="password" placeholder="Your password" class="form-control">
+                    {% if form.is_valid == False%}
+                    {% if form.password.errors %}
+                    <span class="helper-text">{{ form.password.errors }}</span>
+                    {% endif %}
+                    {% endif %}
+                  </div>
+                  <button type="submit">Sign Up</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="{% static 'cpt/js/jquery.min.js' %}"></script>
+  <script src="{% static 'cpt/js/popper.min.js' %}"></script>
+  <script src="{% static 'cpt/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'cpt/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'cpt/js/mixitup.min.js' %}"></script>
+  <script src="{% static 'cpt/js/parallax.min.js' %}"></script>
+  <script src="{% static 'cpt/js/jquery.appear.min.js' %}"></script>
+  <script src="{% static 'cpt/js/odometer.min.js' %}"></script>
+  <script src="{% static 'cpt/js/particles.min.js' %}"></script>
+  <script src="{% static 'cpt/js/meanmenu.min.js' %}"></script>
+  <script src="{% static 'cpt/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'cpt/js/viewer.min.js' %}"></script>
+  <script src="{% static 'cpt/js/slick.min.js' %}"></script>
+  <script src="{% static 'cpt/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'cpt/js/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'cpt/js/form-validator.min.js' %}"></script>
+  <script src="{% static 'cpt/js/contact-form-script.js' %}"></script>
+  <script src="{% static 'cpt/js/main.js' %}"></script>
+</body>
+</html>

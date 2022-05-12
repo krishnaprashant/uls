@@ -1,0 +1,301 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>ULearnSystems</title>
+        <link rel="icon" type="image/png" href="{% static 'cpt/img/favicon.png' %}">
+
+        <link rel="stylesheet" href="{% static 'cpt/revolution/css/settings.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/revolution/css/layers.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/revolution/css/navigation.css' %}">
+
+        <link rel="stylesheet" href="{% static 'cpt/css/bootstrap..min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/boxicons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/flaticon.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/odometer.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/meanmenu.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/nice-select.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/viewer.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/slick.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/magnific-popup.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/extra.css' %}">
+        <link rel="stylesheet" href="{% static 'cpt/css/responsive.css' %}">
+        {% block css %}
+        {% endblock %}        
+    </head>
+    <body>
+      <header class="header-area p-relative">
+          <div class="navbar-area navbar-style-three">
+              <div class="raque-responsive-nav">
+                  <div class="container">
+                      <div class="raque-responsive-menu">
+                          <div class="logo">
+                              <a href="/">
+                                  <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="raque-nav">
+                  <div class="container">
+                      <nav class="navbar navbar-expand-md navbar-light">
+                          <a class="navbar-brand" href="/">
+                              <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+                          </a>
+                          <div class="collapse navbar-collapse mean-menu">
+                              <ul class="navbar-nav">
+                                  <li class="nav-item"><a href="{% url 'training_home' %}" class="nav-link">Corporate Training</a></li>
+                                  <li class="nav-item"><a href="{% url 'course' %}" class="nav-link">Corporate Courses</a></li>
+                                  <li class="nav-item"><a href="#" class="nav-link">One to One Training</a></li>
+                                  <li class="nav-item"><a href="{% url 'Feeds' %}" class="nav-link">Blog</a></li>
+                                  <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+                                  {% if user.is_authenticated %}
+                                  <li class="nav-item"><a href="{% url 'home.profile' %}" class="nav-link"><i class='bx bx-book-open'></i> My Courses</a></li>
+                                  <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><i class='bx bx-log-in'></i> Logout</a></li>
+                                  {% else %}
+                                  <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class='bx bx-log-in'></i> Login</a></li>
+                                  <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class='bx bx-log-in-circle'></i> Register</a></li>
+                                  {% endif %}
+                              </ul>
+
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="navbar-area navbar-style-three header-sticky">
+              <div class="raque-nav">
+                  <div class="container">
+                      <nav class="navbar navbar-expand-md navbar-light">
+                          <a class="navbar-brand" href="/">
+                              <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+                          </a>
+                          <div class="collapse navbar-collapse">
+                              <ul class="navbar-nav">
+                                <li class="nav-item"><a href="{% url 'training_home' %}" class="nav-link">Corporate Training</a></li>
+                                <li class="nav-item"><a href="{% url 'course' %}" class="nav-link">Corporate Courses</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">One to One Training</a></li>
+                                <li class="nav-item"><a href="{% url 'Feeds' %}" class="nav-link">Blog</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>
+                                {% if user.is_authenticated %}
+                                <li class="nav-item"><a href="{% url 'home.profile' %}" class="nav-link"><i class='bx bx-book-open'></i> My Courses</a></li>
+                                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><i class='bx bx-log-in'></i> Logout</a></li>
+                                {% else %}
+                                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class='bx bx-log-in'></i> Login</a></li>
+                                <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class='bx bx-log-in-circle'></i> Register</a></li>
+                                {% endif %}
+                              </ul>
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+
+      </header>
+
+<div class="container mt-5">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>Payment details</h4>
+    </div>
+  </div>
+
+  {% if error %}
+  <span style="color:red">Please fill all mandatory fields.</span>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form">
+        <form id="payuForm" action="{{ action }}?type={{request.GET.type}}&id={{request.GET.id}}&quantity={{request.GET.quantity}}&with={{request.GET.with}}" method="post" name="payuForm">
+          {% csrf_token %}
+          <input type="hidden" name="key" value="{{ MERCHANT_KEY }}" />
+          <input type="hidden" name="hash_string" value="{{ hash_string }}" />
+          <input type="hidden" name="hash" value="{{ hashh }}"/>
+          <input type="hidden" name="posted" value="{{ posted }}"/>
+          <input type="hidden" name="txnid" value="{{ txnid }}" />
+          <input type="hidden" name="amount" value="{{ amount }}" />
+          <input type="hidden" name="firstname" class="form-control" id="firstname" readonly value="{{ posted.firstname|default:request.user.first_name }}" />
+          <input type="hidden" name="email" id="email" class="form-control" readonly value="{{ posted.email|default:request.user.email }}" />
+          <input type="hidden" class="form-control" name="phone" readonly value="{{ posted.phone|default:request.user.phone }}" />
+
+        <div class="row">
+          <div class="col-md-6">
+            <input type="hidden" name="productinfo" value="'type':'{{request.GET.type}}','id':'{{request.GET.id}}','wth':'{{request.GET.with}}'" />
+            <input type="hidden" name="surl" value="http://{{ request.META.HTTP_HOST }}/pum/success/" size="64" />
+            <input type="hidden" name="furl" value="http://{{ request.META.HTTP_HOST }}/pum/failure/" size="64" />
+            <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
+            <input type="hidden" name="curl" value="" />
+            <input type="hidden" name="udf1" value="{{ posted.udf1 }}" />
+            <input type="hidden" name="udf2" value="{{ posted.udf2 }}" />
+            <input type="hidden" name="udf3" value="{{ posted.udf3 }}" />
+            <input type="hidden" name="udf4" value="{{ posted.udf4 }}" />
+            <input type="hidden" name="udf5" value="{{ posted.udf5 }}" />
+            <input type="hidden" name="pg" value="{{ posted.PG }}" />
+          </div>
+        </div>
+        <div class="row mt-3 mb-3">
+          <b>Fill the below details</b>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Name</label>
+              <input type="text" placeholder="Last Name" class="form-control" name="lastname" id="lastname" value="{{ posted.lastname|default:'' }}" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Address1</label>
+              <input type="text" name="address1" class="form-control" placeholder="Address1" value="{{ posted.address1 }}" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Address2</label>
+              <input type="text" name="address2" class="form-control" placeholder="Address2" value="{{ posted.address2 }}" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">City</label>
+              <input type="text" placeholder="City" class="form-control" name="city" value="{{ posted.city }}" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">State</label>
+              <input type="text" placeholder="State" class="form-control" name="state" value="{{ posted.state }}" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">Country:</label>
+              <input type="text" placeholder="Country" class="form-control" name="country" value="{{ posted.country }}" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="">State</label>
+              <input type="text" placeholder="State" class="form-control" name="zipcode" value="{{ posted.zipcode }}" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mt-3 mb-5">
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary" value="Proceed" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget mb-30">
+                    <h3>CONTACT US</h3>
+                    <ul class="contact-us-link">
+                        <li>
+                            <i class='bx bx-phone-call'></i>
+                            <a href="#">+91 9032100074/ 75</a>
+                        </li>
+                        <li>
+                            <i class='bx bx-envelope'></i>
+                            <a href="#">training@ulearnsystems.com</a>
+                        </li>
+                    </ul>
+                    <ul class="social-link">
+                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-facebook'></i></a></li>
+                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-twitter'></i></a></li>
+                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-instagram'></i></a></li>
+                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-linkedin'></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget mb-30">
+                    <h3>OFFERS</h3>
+                    <ul class="support-link">
+                        <li><a href="#">Corporate Group Training</a></li>
+                        <li><a href="#">Join as a Trainer</a></li>
+                        <li><a href="#">Partner Program</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="single-footer-widget mb-30">
+                    <h3>COMPANY</h3>
+                    <ul class="useful-link">
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">View Courses</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</footer>
+
+<div class="go-top"><i class='bx bx-up-arrow-alt'></i></div>
+
+<script src="{% static 'cpt/js/jquery.min.js' %}"></script>
+<script src="{% static 'cpt/js/popper.min.js' %}"></script>
+<script src="{% static 'cpt/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'cpt/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'cpt/js/mixitup.min.js' %}"></script>
+<script src="{% static 'cpt/js/parallax.min.js' %}"></script>
+<script src="{% static 'cpt/js/jquery.appear.min.js' %}"></script>
+<script src="{% static 'cpt/js/odometer.min.js' %}"></script>
+<script src="{% static 'cpt/js/particles.min.js' %}"></script>
+<script src="{% static 'cpt/js/meanmenu.min.js' %}"></script>
+<script src="{% static 'cpt/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'cpt/js/viewer.min.js' %}"></script>
+<script src="{% static 'cpt/js/slick.min.js' %}"></script>
+<script src="{% static 'cpt/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'cpt/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'cpt/js/form-validator.min.js' %}"></script>
+<script src="{% static 'cpt/js/contact-form-script.js' %}"></script>
+<script src="{% static 'cpt/js/main.js' %}"></script>
+
+<script src="{% static 'cpt/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+<script src="{% static 'cpt/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+<script src="{% static 'cpt/js/rev-slider-custom.js' %}"></script>
+<script type="text/javascript">
+  var hash = '{{ hashh }}';
+  if (hash !== '') {
+    console.log("empty");
+    document.getElementById("payuForm").submit();
+  }
+</script>
+</body>
+
+</html>

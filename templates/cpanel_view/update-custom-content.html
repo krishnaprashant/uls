@@ -1,0 +1,83 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+  .change-editor{
+    position: relative;
+    bottom: 50px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load poll_extras %}
+
+
+{% for msg in messages %}
+   {% if msg.tags == 'success' %}
+   <p class="bg-success text-white p-2">{{msg}}</p>
+   {% else %}
+   <p class="bg-danger text-white p-2">{{msg}}</p>
+   {% endif %}
+{% endfor %}
+
+<h4 class="card-title">Update Content</h4>
+<p class="text-muted m-b-15 f-s-12">Please fill the form to create
+  <code>NEW</code> Content.
+</p>
+<button type="button" class="btn btn-primary float-right change-editor" name="button">Change editor to basic mode</button>
+<div class="basic-form">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Url"
+      value="{{content.url}}" name="url" id="" />
+      {% if form.is_valid == False%}
+      {% if form.url.errors %}
+      <span class="helper-text">{{ form.url.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea class="form-control h-150px" rows="6" placeholder="Content" name="content">{{content.content}}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.content.errors %}
+      <span class="helper-text">{{ form.content.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <br>
+    <div class="">
+      <button type="submit" class="btn btn-dark mb-2">Update</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var toggle = 1;
+    function editor_on(){
+      $('#summernote').css('display','block');
+      $(".note-editor").css('display','none');
+    }
+    function editor_off(){
+      $('#summernote').css('display','none');
+      $(".note-editor").css('display','block');
+    }
+    $(".change-editor").click(function () {
+      if(toggle>0){
+        editor_on();
+        toggle = 0;
+      }else{
+        editor_off();
+        toggle = 1;
+      }
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#summernote').summernote();
+  });
+</script>
+{% endblock %}

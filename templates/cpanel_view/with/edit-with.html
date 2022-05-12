@@ -1,0 +1,83 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+.errorlist > li {
+    color: red;
+}
+.form-group > label{
+    font-weight: bolder;
+}
+.fstElement {
+    display: block !important;
+}
+.fstResultItem {
+  font-size: 14px !important;
+}
+.fstMultipleMode .fstQueryInput {
+    font-size: 14px !important;
+}
+.fstChoiceItem {
+  font-size: 14px !important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% load poll_extras %}
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+{% if request.GET.with == "country" %}
+    <h4>Add course with country</h4>
+{% elif request.GET.with == "city" %}
+    <h4>Add course with city</h4>
+{% else %}
+    <h4>Add course without city/country</h4>
+{% endif %}
+<div class="basic-form">
+    <form action="" method="post" novalidate >
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% if 'clone' in request.get_full_path %}
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="Add">
+        </div>
+        {% else %}
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="Update">
+        </div>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(document).ready(function () {
+      if(window.location.search.includes('city')){
+        console.log("..");
+      }
+      else if(!window.location.search.includes('city') && !window.location.search.includes('country')){
+        console.log("....");
+      }else{
+        $("#main-wrapper > div.content-body > div.container-fluid > div > div > div > div > div > form > div:nth-child(7) > label").html("Excluding Countries");
+      }
+      $('.summernote').summernote();
+    });
+
+</script>
+<script>
+
+</script>
+{% endblock %}

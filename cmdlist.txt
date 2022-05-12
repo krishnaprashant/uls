@@ -1,0 +1,326 @@
+1  python3
+2  python3 --version
+3  clear
+4  pip3 --version
+5  cd /opt/
+6  ll
+7  python -m venv ulearn_env
+8  python3 -m venv ulearn_env
+9  python3 -m pip install venv
+10  python3 -m pip3 install venv
+11  python3  -m pip --version
+12  apt-get install python3-venv
+13  pip3 --version
+14  apt install python3-pip
+15  ll
+16  cd /home
+17  ll
+18  cd ubuntu/
+19  ll
+20  clear
+21  apt install python3-pip
+22  python3 -m pip
+23  python3 -m pip3 --version
+24  sudo apt-get install python3-pip
+25  sudo apt-get update
+26  sudo apt-get install python3-pip
+27  pip --version
+28  pip3 --version
+29  pip install venv
+30  pip3 install venv
+31  pip3 install virtualenv
+32  clear
+33  cd /opt/
+34  ll
+35  rm -rf ulearn_env/
+36  ll
+37  python -m venv ulearn_env
+38  python3 -m venv ulearn_env
+39  apt-get install python3-venv
+40  python -m venv ulearn_env
+41  python3 -m venv ulearn_env
+42  ll
+43  cd ulearn_env/
+44  ll
+45  cd ..
+46  source ulearn_env/bin/activate
+47  ll
+48  clear
+49  python3 --version
+50  pip --version
+51  pip freeze
+52  ll
+53  asgiref==3.3.1
+54  autopep8==1.5.5
+55  beautifulsoup4==4.9.1
+56  Django==3.1.7
+57  gunicorn==20.0.4
+58  mysqlclient==2.0.3
+59  Pillow==8.1.0
+60  pkg-resources==0.0.0
+61  pycodestyle==2.6.0
+62  pytz==2021.1
+63  soupsieve==2.2
+64  sqlparse==0.4.1
+65  clear
+66  pip --version
+67  ll
+68  mkdir web
+69  chmod 777 -R web
+70  ll
+71  cd web/
+72  unzip
+73  apt install unzip
+74  clear
+75  uzip ulearn.zip
+76  unzip ulearn.zip
+77  ll
+78  chmod 777 -R ulearn
+79  ll
+80  cd ulearn/
+81  clear
+82  ll
+83  cat req.txt
+84  nano req.txt
+85  pip install -r req.txt
+86  sudo apt-get install python3-dev build-essential default-libmysqlclient-dev
+87  pip install -r req.txt
+88  sudo apt-get install -y nginx
+89  ll
+90  gunicorn --bind 0.0.0.0:8000 ulearn.wsgi:application
+91  clear
+92  sudo apt-get install supervisor
+93  cd /etc/supervisor/conf.d/
+94  ls
+95  touch gunicor.conf
+96  ll
+97  nano gunicor.conf
+98  cat gunicor.conf
+99  mv gunicor.conf gunicorn.conf
+100  ll
+101  cat gunicorn.conf
+102  pwd
+103  cd /opt/web/ulearn/
+104  ll
+105  pwd
+106  cd /etc/supervisor/conf.d
+107  ll
+108  nano gunicorn.conf
+109  cat gunicorn.conf
+110  cd /opt/web/ulearn
+111  ll
+112  cd /etc/supervisor/conf.d
+113  supervisorctl reread
+114  sudo mkdir /var/log/gunicorn
+115  supervisorctl reread
+116  supervisorctl update
+117  supervisorctl status
+118  cd /var/
+119  gunicorn
+120  cd gunicorn
+121  cd log/
+122  cd gunicorn/
+123  ll
+124  cat gunicorn.err.log
+125  cd /opt/web/ulearn/
+126  ll
+127  cat app.sock/
+128  rm -rf app.sock/
+129  ll
+130  supervisorctl reread
+131  supervisorctl update
+132  supervisorctl status
+133  ll
+134  enable guniorn
+135  enable gunicorn
+136  systemctl enable gunicorn
+137  gunicorn --bind 0.0.0.0:8000 ulearn.wsgi:application
+138  ll
+139  exit
+140  supervisor status
+141  supervisorctl status
+142  cd /opt/web/ulearn/
+143  ll
+144  cd /var/log/supervisor/
+145  ll
+146  cd ..
+147  ll
+148  cd gunicorn/
+149  ll
+150  cat gunicorn.err.log
+151  systemctl deamon-reload
+152  systemctl daemon-reload
+153  sudo systemctl start gunicorn
+154  cd /opt/web/
+155  ll
+156  chown ubuntu:ubuntu -R
+157  chown ubuntu:ubuntu -R ulearn
+158  ll
+159  cd ulearn/
+160  ll
+161  supervisor reread
+162  supervisorctl reread
+163  supervisorctl update
+164  supervisorctl status
+165  cd /etc/supervisor/conf.d/
+166  nano gunicorn.conf
+167  cat gunicorn.conf
+168  cd/opt/ulearn_env/bin/
+169  cd /opt/ulearn_env/bin/
+170  ll
+171  cd /opt/ulearn_env/bin/gunicorn
+172  pwd
+173  /opt/ulearn_env/bin/gunicorn --helpt
+174  /opt/ulearn_env/bin/gunicorn --help
+175  clear
+176  cd /etc/supervisor/conf.d/
+177  cat gunicorn.conf
+178  cat /var/log/gunicorn/gunicorn.err.log
+179  cd /opt/web/ulearn/
+180  lll
+181  ll
+182  /opt/ulearn_env/bin/gunicorn 0.0.0.0:8000 ulearn.wsgi:application
+183  source /opt/ulearn_env/bin/activate
+184  /opt/ulearn_env/bin/gunicorn 0.0.0.0:8000 ulearn.wsgi:application
+185  gunicorn 0.0.0.0:8000 ulearn.wsgi:application
+186  gunicorn --bind 0.0.0.0:8000 ulearn.wsgi:application
+187  systemctl mysql
+188  systemctl mysqld status
+189  service mysqld status
+190  apt-get install mysql
+191  apt-get install mysql-server
+192  systemctl mysqld status
+193  service mysqld status
+194  systemctl start mysql
+195  systemctl status mysql
+196  gunicorn --bind 0.0.0.0:8000 ulearn.wsgi:application
+197  mysql -u root -p
+198  python3 manage.py makemigrations
+199  python3 manage.py migrate
+200  gunicorn --bind 0.0.0.0:8000 ulearn.wsgi:application
+201  supervisorctl reread
+202  supervisorctl upate
+203  supervisorctl update
+204  supervisorctl status
+205  supervisorctl restart
+206  supervisorctl status
+207  supervisorctl reread
+208  supervisorctl restart
+209  supervisorctl reread
+210  supervisorctl update
+211  supervisorctl status
+212  cd /etc/supervisor/conf.d/
+213  ll
+214  cat gunicorn.conf
+215  clear
+216  systemctl start gunicorn
+217  cd /opt/
+218  ll
+219  chmod 777 ulearn_env/
+220  chmod 777 -r ulearn_env/
+221  chmod 777 -R ulearn_env/
+222  supervisorctl reread
+223  supervisorctl update
+224  supervisorctl status
+225  supervisorctl restart
+226  supervisorctl start
+227  supervisorctl reread
+228  cd ..
+229  cd /etc/supervisor/
+230  cd conf.d/
+231  ll
+232  clear
+233  supervisorctl reread
+234  supervisorctl update
+235  supervisorctl status
+236  mv gunicorn.conf gunicorn_conf
+237  ll
+238  supervisorctl reread
+239  supervisorctl update
+240  mv gunicorn_conf gunicorn.conf
+241  ll
+242  supervisorctl reread
+243  supervisorctl update
+244  supervisorctl status
+245  cd /etc/nginx/sites-available/
+246  ll
+247  touch django.conf
+248  nano django.conf
+249  nginx -t
+250  ln django.conf /etc/nginx/sites-enabled/
+251  nginx -t
+252  nginx restart
+253  systemctl nginx restart
+254  systemctl nginx start
+255  sudo service nginx start
+256  sudo service nginx restart
+257  nanao django.conf
+258  nano django.conf
+259  sudo service nginx restart
+260  nginx -t
+261  cd /opt/web/ulearn/
+262  ll
+263  cd static/
+264  ll
+265  pwd
+266  cat /etc/nginx/sites-available/django.conf
+267  cd /etc/nginx/sites-available/
+268  nano django.conf
+269  cat /etc/nginx/sites-available/django.conf
+270  sudo service nginx restart
+271  nginx -t
+272  service nginx restart
+273  cd /opt/web/ulearn/static/admin/
+274  ll
+275  cd css/
+276  ll
+277  cd ..
+278  cd img/
+279  ll
+280  cd ..
+281  cd..
+282  cd ..
+283  ll
+284  python3 manage.py collectstatic
+285  cd assets/
+286  ll
+287  cp admin/ /opt/web/ulearn/static/
+288  cp admin/ -R /opt/web/ulearn/static/
+289  clear
+290  cd ..
+291  cd static/
+292  ll
+293  cd admin/
+294  ll
+295  cd css/
+296  ll
+297  source /opt/ulearn_env/bin/activate
+298  cd /opt/web/ulearn
+299  python manage.py createsuperuser
+300  clear
+301  supervisorctl restart
+302  systemctl supervisor restart
+303  systemctl supervisorctl restart
+304  supervisorctl restart
+305  supervisorctl restart all
+306  service supervisor restart
+307  exit
+308  service supervisor restart
+309  cd /opt/web/ulearn/
+310  ll
+311  cd cpanel/
+312  cp templatetags/ /opt/web/ulearn/event/
+313  cp .templatetags/ /opt/web/ulearn/event/
+314  cp /opt/web/ulearn/cpanel/templatetags /opt/web/ulearn/event/
+315  cp templatetags /opt/web/ulearn/event/
+316  cp -R templatetags /opt/web/ulearn/event/
+317  cd ..
+318  ll
+319  chmod 777 -R templatetags/
+320  ll
+321  rm -rf templatetags/
+322  service supervisor restart
+323  cd ~
+324  clear
+325  service supervisor restart
+326  history

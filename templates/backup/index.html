@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+{% block meta %}
+{{content | safe}}
+{% endblock %}
+{% block content %}
+{% load static %}
+
+<section class="banner-wrapper">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="wrapper-content">
+                    <h1>We help you achieve agility and build…</h1>
+                    <form action="{% url 'search_homepage' %}" method="GET">
+                        <input type="text" name="q" class="input-search" placeholder="What do you want to learn?">
+                        <button type="submit">Search</button>
+                    </form>
+                    <p class="ptb-10">Driving effective learning is a challenge - but it doesn't have to be that way. We are the true learning partner
+                      that helps impact your business from top to bottom. From strategy to execution, we're alongside you throughout this journey.</p>
+                </div>
+
+                <div class="events-details-header ">
+                    <div class="events-meta">
+                        <ul>
+                            <li>
+                                <i class='bx bx-check'></i>
+                                <span>1 to 1 Training</span>
+                                <a href="https://ulearnsystems.com/contactus">30% Offer <br/> Enroll Now</a>
+                            </li>
+                            <li>
+                                <i class='bx bx-check'></i>
+                                <span>Classroom Training</span>
+                                <a href="https://ulearnsystems.com/contactus">20% Offer <br/> Enroll Now</a>
+                            </li>
+                            <li>
+                                <i class='bx bx-check'></i>
+                                <span>Online Training</span>
+                                <a href="https://ulearnsystems.com/contactus">20% Offer <br/> Enroll Now</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="business-banner-image">
+                    <img src="{% static 'cpt/img/banner-img4.png' %}" alt="ulearnsystems-home-banner">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pt-70 pb-70 bg-grey">
+    <div class="container">
+        <div class="about-sec">
+            <h2>Upskill Your Organization and Unlock Your Team's Potential</h2>
+            <p>Our implementation consultants will design a training program for your business’s unique digital transformation journey to address your team’s skills gaps.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="courses-area pt-100 pb-70">
+  <div class="container">
+    <div class="tab courses-list-tab">
+      <ul class="tabs">
+        <li><a href="#">All Courses</a></li>
+        <li><a href="#">Project Management</a></li>
+        <li><a href="#">Agile & Scrum</a></li>
+        <li><a href="#">IT Service Management</a></li>
+        <li><a href="#">Quality Management</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}rrr</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="tabs-item">
+          <div class="row">
+              {% for trainings in training %}
+              {% if trainings.selecting_category == "Project management" %}
+              <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+              {% endif %}
+              {% endfor %}
+          </div>
+        </div>
+        <div class="tabs-item">
+          <div class="row">
+              {% for trainings in training %}
+              {% if trainings.selecting_category == "Agile & Scrum" %}
+              <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+              {% endif %}
+              {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="tabs-item">
+          <div class="row">
+              {% for trainings in training %}
+              {% if trainings.selecting_category == "IT Service Management" %}
+              <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30 h-350">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+              {% endif %}
+              {% endfor %}
+          </div>
+        </div>
+        <div class="tabs-item">
+          <div class="row">
+            {% for trainings in training %}
+            {% if trainings.selecting_category == "Quality Management" %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="single-categories-courses-box mb-30">
+                <div class="course-img">
+                  <img src="{{ trainings.course_picture }}" alt="">
+                </div>
+                <h3>{{trainings.course_name}}</h3>
+                <a href="{% url 'training.details' %}?id={{trainings.id}}" class="default-btn">
+                  <span class="label">Select Course</span>
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="distance-learning-area pt-70 bg-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="distance-learning-image">
+                    <img src="{% static 'cpt/img/banner-img4.png' %}" alt="image">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="distance-learning-content">
+                    <h2>Transform your workforce for the future</h2>
+                    <ul class="features-list">
+                        <li><span><i class="bx bx-check"></i> Assess:<P>Discover your team's strength and weaknesses</p></span></li>
+                        <li><span><i class="bx bx-check"></i> Upskill:<p>Build the expertise you need in an immersive learning experience.</p></span></li>
+                        <li><span><i class="bx bx-check"></i> Analyze:<p>Get the insights to ensure your teams are building on skills they need to deliver on business objectives.</p>
+
+</span></li>
+                        <li><span><i class="bx bx-check"></i> Scale: <p>Build teams you can count on and put the right people on the right jobs.</p>
+
+</span></li>
+                    </ul>
+                </div>
+                <div class="partner-area">
+                    <h2 class="slider-part">Our Company & Partners</h2>
+                    <div class="partner-slides owl-carousel owl-theme">
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/TMF-Logo-ENG.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/IBM.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/ValueMomentum-logo.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/Blacknight.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/appswave.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/wavemoney.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                        <div class="single-partner-item">
+                            <a href="#" class="d-block">
+                                <img src="{% static 'cpt/img/partner/valuelabs.png' %}" alt="ulearnsystems-partnerlogo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slider-btn text-center ptb-10">
+                        <a href="#" class="default-btn"><span class="label">Explore More</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="learning-area pt-100 pb-70">
+  <div class="container">
+
+  </div>
+</section>
+
+
+<section class="partner-area">
+    <div class="container">
+      <div></div>
+        <div class="section-title">
+            <h2>Upskilling Professionals of Leading Organizations Worldwide</h2>
+        </div>
+        <div class="partner-slides owl-carousel owl-theme">
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/pmi.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/scaledagile.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/scrum.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/axelos.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/peoplecert.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/exin.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/devops.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our Accredations logo  -->
+<section class="partner-area mt-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Trusted by Global Governing Bodies</h2>
+        </div>
+        <div class="partner-slides owl-carousel owl-theme">
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/IBM.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/ValueMomentum-logo.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/TMF-Logo-ENG.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/Blacknight.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/appswave.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/wavemoney.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+            <div class="single-partner-item">
+                <a href="#" class="d-block">
+                    <img src="{% static 'cpt/img/partner/valuelabs.png' %}" alt="ulearnsystems-partnerlogo">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="feedback-area ptb-100">
+        <div class="container">
+            <div class="feedback-slides-two owl-carousel owl-theme">
+                <div class="single-feedback-slides-item">
+                    <p>I personally felt like: It's Worth attending the session and Mr. Naveen Delivered the content which i liked very much and the Conceptual Flow is very good and i could able to Grab the essence as a whole</p>
+                    <div class="client-info d-flex align-items-center">
+                        <img src="/static/cpt/img/partner/11.png" class="rounded-circle" alt="ulearnsystems-reviewlogo">
+                        <div class="title">
+                            <h3>Kakumani Suman</h3>
+                            <span>Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-feedback-slides-item">
+                    <p>Fantastic online training on ITIL 4. The trainer was super and very resourceful and explained the subject very clearly. Training materials were very good and helpful as well. This is the first online training that I will enjoy and also recommend to anyone. A very well done to the entire team at U Learn Systems. Very good customer service</p>
+                    <div class="client-info d-flex align-items-center">
+                        <img src="/static/cpt/img/partner/11.png" class="rounded-circle" alt="ulearnsystems-reviewlogo">
+                        <div class="title">
+                            <h3>Eghosa Ojo</h3>
+                            <span>Technical Consultant</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-feedback-slides-item">
+                    <p>It was thorough and well-organized training and I thank for that. The material was very interesting, excellent and very interactive, and the discussions were truly inspiring and informative. I particularly enjoyed the visual illustrations, which made the content easily understandable. given very good constructive ideas about ITIL Foundation exam thru questions answers by the Instructor.</p>
+                    <div class="client-info d-flex align-items-center">
+                        <img src="/static/cpt/img/partner/11.png" class="rounded-circle" alt="ulearnsystems-reviewlogo">
+                        <div class="title">
+                            <h3>Lewis A. Pegado</h3>
+                            <span>QA Developer</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="single-feedback-slides-item">
+                    <p>Excellent trainer, well organised me an my team got PSM 1 certification in one attempt, Thank you for the support and guiding the best practices to clearing the exam.</p>
+                    <div class="client-info d-flex align-items-center">
+                        <img src="/static/cpt/img/partner/11.png" class="rounded-circle" alt="ulearnsystems-reviewlogo">
+                        <div class="title">
+                            <h3>Maria Fernanda Acosta Navarrete</h3>
+                            <span>Scrum Master</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

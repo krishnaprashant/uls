@@ -1,0 +1,72 @@
+{% extends 'cpanel.html' %}
+
+{% block content %}
+{% load static %}
+{% for msg in messages %}
+{% if msg.tags == 'success' %}
+<p class="bg-success text-white p-2">{{msg}}</p>
+  {% else %}
+  <p class="bg-danger text-white p-2">{{msg}}</p>
+  {% endif %}
+{% endfor %}
+<h3>courses</h3>
+<table class="table table-striped table-bordered zero-configuration">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Question</th>
+      <th>Answer</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for FAQ in faq%}
+    <tr>
+      <td>{{FAQ.course}}</td>
+      <td>{{FAQ.question}}</td>
+      <td>{{FAQ.answer}}</td>
+      <td><a href="{% url 'cpanel.UpdateFaq' %}?id={{FAQ.id}}">update</a></td>
+      <td><a href="javascript:void(0)" onclick="deleteFAQ('{% url 'cpanel.deleteFaq' %}?id={{FAQ.id}}')" >delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <th>Course</th>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tfoot>
+</table>
+
+{% block script %}
+
+<script src="{% static 'admin/sweet/sweetalert/dist/sweetalert.min.js' %}"></script>
+
+<script type="text/javascript">
+  function deleteFAQ(url) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this FAQ details",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your FAQ has been deleted!", {
+          icon: "success",
+        });
+        setTimeout(function(){
+          window.location.href = url;
+        },2000);
+      } else {
+        swal("Your FAQ is safe!");
+      }
+    });
+  }
+  </script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+  .user-review > img{
+    height: 45px !important;
+    width: 45px !important;
+  }
+  .delete-button{
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #cb5b5b;
+    float: right;
+    position: relative;
+    top: 40px;
+  }
+  .author-profile-title > img{
+    object-fit: cover;
+    object-position: center;
+  }
+</style>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="page-title-area page-title-style-three item-bg4 jarallax" data-jarallax='{"speed": 0.3}'>
+    <div class="container">
+        <div class="page-title-content">
+            <h2>QnA</h2>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li>QnA</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="pt-70">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8">
+        {% for msg in messages %}
+           {% if msg.tags == 'success' %}
+           <p class="bg-success text-white p-2">{{msg}}</p>
+           {% else %}
+           <p class="bg-danger text-white p-2">{{msg}}</p>
+           {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="courses-details-area pt-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group pb-3">
+                        <label for="query">Post Your Query</label>
+                        <textarea class="form-control" id="query" name="query" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-warning">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="courses-details-area pt-30 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div class="courses-details-desc">
+                  {% for p in posts%}
+                    <div class="courses-author">
+                        <div class="author-profile-header">
+                          {% if request.user == p.user  %}
+                              <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pst" value="{{p.id}}">
+                                <button type="submit" class="delete-button">Delete Post</button>
+                              </form>
+                          {% endif %}
+                        </div>
+                        <div class="author-profile">
+                            <div class="author-profile-title">
+                              {% if p.user.profile_pic == "" %}
+                                <img src="{% static 'cpt/img/user.png' %}" alt="image">
+                              {% else %}
+                                <img src="{{p.user.profile_pic}}" class="shadow-sm rounded-circle" alt="image">
+                              {% endif %}
+                                <div class="author-profile-title-details d-flex justify-content-between">
+                                    <div class="author-profile-details">
+                                        <h4>{{p.user.first_name}}</h4>
+                                        <span class="d-block">{{p.user}}</span>
+                                    </div>
+                                    <div class="author-profile-raque-profile">
+                                        <a href="{% url 'qna_thread' %}?id={{p.id}}" class="d-inline-block">Read More »</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                              {{p.post}}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="courses-review-comments">
+                        <h3>Top Stories for You</h3>
+                        <div class="user-review">
+                            <img src="assets/img/user1.jpg" alt="image">
+                            <div class="review-rating">
+                                <div class="review-stars">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                                <span class="d-inline-block">James Anderson</span>
+                            </div>
+                            <span class="d-block sub-comment">Excellent</span>
+                            <p>Very well built theme, couldn't be happier with it. Can't wait for future updates to see
+                                what else they add in.</p>
+                        </div>
+                        <div class="user-review">
+                            <img src="assets/img/user1.jpg" alt="image">
+                            <div class="review-rating">
+                                <div class="review-stars">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                                <span class="d-inline-block">Sarah Taylor</span>
+                            </div>
+                            <span class="d-block sub-comment">Video Quality!</span>
+                            <p>Was really easy to implement and they quickly answer my additional questions!</p>
+                        </div>
+                        <div class="user-review">
+                            <img src="assets/img/user1.jpg" alt="image">
+                            <div class="review-rating">
+                                <div class="review-stars">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                </div>
+                                <span class="d-inline-block">David Warner</span>
+                            </div>
+                            <span class="d-block sub-comment">Perfect Coding!</span>
+                            <p>Stunning design, very dedicated crew who welcome new ideas suggested by customers, nice
+                                support.</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

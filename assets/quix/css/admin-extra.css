@@ -1,0 +1,10 @@
+.wrap-text{
+  white-space: nowrap;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.web-small{
+      height: auto;
+    width: 150px;
+}

@@ -1,0 +1,107 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<h3>Trainings</h3>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered zero-configuration">
+        <thead>
+            <tr>
+                <th>Selecting Category</th>
+                <th>Course Type</th>
+                <th>Course Name</th>
+                <th>Course Picture</th>
+                <th>Slug</th>
+                <th>H1 Name</th>
+                <th>Fee</th>
+                <th>Course Description</th>
+                <th>Course Key Features</th>
+                <th>what you learn</th>
+                <th>Course Syllabus</th>
+                <th>Meta Titile </th>
+                <th>Meta Description </th>
+                <th>Meta Keywords</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for training in trainings%}
+            <tr>
+                <td>{{ training.selecting_category }}</td>
+                <td>{{ training.course_type }}</td>
+                <td>{{ training.course_name }}</td>
+                <td><img class="web-small" src="{{ training.course_picture }}" alt=""></td>
+                <td>{{ training.slug }}</td>
+                <td>{{ training.h1_name }}</td>
+                <td>{{ training.fee }}</td>
+                <td><div class="wrap-text">{{ training.course_description }}</div></td>
+                <td><div class="wrap-text">{{ training.course_key_features }}</div></td>
+                <td><div class="wrap-text">{{ training.what_you_learn }}</div></td>
+                <td><div class="wrap-text">{{ training.course_syllabus }}</div></td>
+                <td><div class="wrap-text">{{ training.meta_title }}</div></td>
+                <td><div class="wrap-text">{{ training.meta_description }}</div></td>
+                <td><div class="wrap-text">{{ training.meta_keywords }}</div></td>
+                <td><a href="{% url 'UpdateTrainingForm' %}?id={{training.id}}">update</a></td>
+                <td><a href="javascript:void(0)" onclick="deleteCourse('{% url 'DeleteTraining' %}?id={{training.id}}')">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Selecting Category</th>
+                <th>Course Type</th>
+                <th>Course Name</th>
+                <th>Slug</th>
+                <th>H1 Name</th>
+                <th>Fee</th>
+                <th>Course Description</th>
+                <th>Course Key Features</th>
+                <th>what you learn</th>
+                <th>Course Syllabus</th>
+                <th>Meta Titile </th>
+                <th>Meta Description </th>
+                <th>Meta Keywords</th>
+                <th>Course Picture</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+{% endblock %}
+{% block script %}
+
+<script src="{% static 'admin/sweet/sweetalert/dist/sweetalert.min.js' %}"></script>
+
+<script type="text/javascript">
+  function deleteCourse(url) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this course details",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your course has been deleted!", {
+          icon: "success",
+        });
+        setTimeout(function(){
+          window.location.href = url;
+        },2000);
+      } else {
+        swal("Your course is safe!");
+      }
+    });
+  }
+  </script>
+{% endblock %}

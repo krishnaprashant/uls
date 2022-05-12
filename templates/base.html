@@ -1,0 +1,636 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block meta %}
+  {% endblock %}
+  {% block meta_keywords %}
+  {% endblock %}
+  {% block meta_description %}
+  {% endblock %}
+  <title>
+    {% block meta_title %}
+    {% if course.meta_title %}
+    {{course.meta_title}}
+    {% else %}
+    ulearnsystems
+    {% endif %}
+    {% endblock %}
+  </title>
+  {{content | safe}}
+  <meta name="google-site-verification" content="z0HGN3i2M6OAti0dNkSwM-IAIjClsZpyO4HKB_P-8_s" />
+  <link rel="icon" type="image/png" href="{% static 'cpt/img/favicon.png' %}">
+  {{ CustomContent | safe }}
+  <!-- Canonical  -->
+  <link rel="canonical" href="{{full_url | safe}}"/>
+  <!-- Canonical end -->
+  {% if '/course/' in request.path %}
+    {% for i in country_list %}
+                                    <link rel="alternate" href="{{url}}{{ i.country_code }}/course/{{slug | safe}}" hreflang="en-{{ i.country_code }}"/>{% endfor %}
+  {% endif %}
+  <link rel="stylesheet" href="{% static 'cpt/revolution/css/settings.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/revolution/css/layers.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/revolution/css/navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/bootstrap..min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/boxicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/odometer.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/meanmenu.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/animate.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/nice-select.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/viewer.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/slick.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/magnific-popup.min.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/extra.css' %}">
+  <link rel="stylesheet" href="{% static 'cpt/css/responsive.css' %}">
+  {% block css %}
+  {% endblock %}
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KZFSXK7');
+</script>
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZFSXK7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125971895-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125971895-1');
+</script>
+
+</head>
+
+<body>
+  <header class="header-area p-relative">
+
+    <div class="navbar-area navbar-style-three">
+      <div class="raque-responsive-nav">
+        <div class="container">
+          <div class="raque-responsive-menu">
+            <div class="logo">
+              <a href="/">
+                <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="raque-nav">
+        <div class="container">
+          <nav class="navbar navbar-expand-md navbar-light">
+            <a class="navbar-brand" href="/">
+              <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+            </a>
+            <div class="collapse navbar-collapse mean-menu">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="javascript:void(0)" class="nav-link">All Courses</a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="javascript:void(0)">Project management</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for ct in courseTitle %}
+                        {% if ct.category == "Project Management" %}
+                        <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                    <li><a class="dropdown-item" href="javascript:void(0)">Agile & Scrum</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for ct in courseTitle %}
+                          {% if ct.category == "Agile & Scrum" %}
+                          <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                    <li><a class="dropdown-item" href="javascript:void(0)">IT Service Management</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for ct in courseTitle %}
+                        {% if ct.category == "IT Service Management" %}
+                        <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0)">Quality Management</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for ct in courseTitle %}
+                        {% if ct.category == "Quality Management" %}
+                        <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link">One to One Training</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'home.profile' %}" class="nav-link"><i class='bx bx-book-open'></i>
+                  My Courses</a></li>
+                  <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><i class='bx bx-log-in'></i>
+                    Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class='bx bx-log-in'></i> Login</a>
+                    </li>
+                    <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class='bx bx-log-in-circle'></i>Register</a></li>
+                    {% endif %}
+
+                    {% if split_length > 5 %}
+                    <li class="nav-item">
+                      <a href="javascript:void(0)" class="nav-link">
+                        <select id="CitySelect" class="form-select mycitylist" aria-label="Default select example">
+                        </select>
+                      </a>
+                    </li>
+                    {% endif %}
+                      <li class="nav-item"><a href="/contactus" class="nav-link">Contact</a></li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-area navbar-style-three header-sticky">
+          <div class="raque-nav">
+            <div class="container">
+              <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="/">
+                  <img src="{% static 'cpt/img/black-logo.png' %}" alt="logo">
+                </a>
+                <div class="collapse navbar-collapse">
+                  <ul class="navbar-nav">
+                    <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="javascript:void(0)" class="nav-link">View Courses</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="javascript:void(0)">Project management</a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            {% for ct in courseTitle %}
+                            {% if ct.category == "Project Management" %}
+                            <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="javascript:void(0)">Agile & Scrum</a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            {% for ct in courseTitle %}
+                            {% if ct.category == "Agile & Scrum" %}
+                            <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="javascript:void(0)">IT Service Management</a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            {% for ct in courseTitle %}
+                            {% if ct.category == "IT Service Management" %}
+                            <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="javascript:void(0)">Quality Management</a>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            {% for ct in courseTitle %}
+                            {% if ct.category == "Quality Management" %}
+                            <li class="dropdown-item text-wrap"><a href="/course/{{ct.slug}}">{{ct.title}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">One to One Training</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'home.profile' %}" class="nav-link"><i class='bx bx-book-open'></i>
+                      My Courses</a></li>
+                      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><i class='bx bx-log-in'></i>
+                        Logout</a></li>
+                        {% else %}
+                        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><i class='bx bx-log-in'></i> Login</a>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class='bx bx-log-in-circle'></i>
+                          Register</a></li>
+                          {% endif %}
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+
+            </header>
+
+            {% block content %}
+
+            {% endblock %}
+            <footer class="footer-area">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="single-footer-widget mb-30">
+                      <h3>CONTACT US</h3>
+                      <ul class="contact-us-link">
+                        <li>
+                          <i class='bx bx-phone-call'></i>
+                          <a href="#">+91 9032100074</a>
+                        </li>
+                        <li>
+                          <i class='bx bx-envelope'></i>
+                          <a href="#">training@ulearnsystems.com <br/> alen@ulearnsystems.com</a>
+                        </li>
+                      </ul>
+                      <ul class="social-link">
+                        <li><a href="https://www.facebook.com/ulearnsystem/" class="d-block" target="_blank"><i class='bx bxl-facebook'></i></a></li>
+                        <li><a href="https://twitter.com/ulearnsystems" class="d-block" target="_blank"><i class='bx bxl-twitter'></i></a></li>
+                        <li><a href="https://www.instagram.com/ulearnsys/" class="d-block" target="_blank"><i class='bx bxl-instagram'></i></a></li>
+                        <li><a href="https://www.linkedin.com/school/13327806/" class="d-block" target="_blank"><i class='bx bxl-linkedin'></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="single-footer-widget mb-30">
+                      <h3>OFFERS</h3>
+                      <ul class="support-link">
+                        <li><a href="#">Corporate Group Training</a></li>
+                        <li><a href="#">Join as a Trainer</a></li>
+                        <li><a href="#">Partner Program</a></li>
+                        <li><a href="{% url 'Feeds' %}">Blog</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="single-footer-widget mb-30">
+                      <h3>COMPANY</h3>
+                      <ul class="useful-link">
+                        <li><a href="{% url 'home.contactus' %}">Contact Us</a></li>
+                        <li><a href="{% url 'home.AboutUs' %}">About Us</a> </li>
+                      <!--  <li><a href="{% url 'qna_home' %}">Qna</a></li>-->
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="single-footer-widget mb-30">
+                      <select id="CountrySelect">
+                        <option {% if request.session.country == "af" %} selected {% endif %} value="af">Afghanistan</option>
+                        <option {% if request.session.country == "ax" %} selected {% endif %} value="ax">Aland</option>
+                        <option {% if request.session.country == "al" %} selected {% endif %} value="al">Albania</option>
+                        <option {% if request.session.country == "dz" %} selected {% endif %} value="dz">Algeria</option>
+                        <option {% if request.session.country == "ad" %} selected {% endif %} value="ad">Andorra</option>
+                        <option {% if request.session.country == "ao" %} selected {% endif %} value="ao">Angola</option>
+                        <option {% if request.session.country == "ai" %} selected {% endif %} value="ai">Anguilla</option>
+                        <option {% if request.session.country == "ag" %} selected {% endif %} value="ag">Antigua and Barbuda</option>
+                        <option {% if request.session.country == "ar" %} selected {% endif %} value="ar">Argentina</option>
+                        <option {% if request.session.country == "am" %} selected {% endif %} value="am">Armenia</option>
+                        <option {% if request.session.country == "aw" %} selected {% endif %} value="aw">Aruba</option>
+                        <option {% if request.session.country == "au" %} selected {% endif %} value="au">Australia</option>
+                        <option {% if request.session.country == "at" %} selected {% endif %} value="at">Austria</option>
+                        <option {% if request.session.country == "az" %} selected {% endif %} value="az">Azerbaijan</option>
+                        <option {% if request.session.country == "bs" %} selected {% endif %} value="bs">Bahamas</option>
+                        <option {% if request.session.country == "bh" %} selected {% endif %} value="bh">Bahrain</option>
+                        <option {% if request.session.country == "bd" %} selected {% endif %} value="bd">Bangladesh</option>
+                        <option {% if request.session.country == "bb" %} selected {% endif %} value="bb">Barbados</option>
+                        <option {% if request.session.country == "by" %} selected {% endif %} value="by">Belarus</option>
+                        <option {% if request.session.country == "be" %} selected {% endif %} value="be">Belgium</option>
+                        <option {% if request.session.country == "bz" %} selected {% endif %} value="bz">Belize</option>
+                        <option {% if request.session.country == "bj" %} selected {% endif %} value="bj">Benin</option>
+                        <option {% if request.session.country == "bm" %} selected {% endif %} value="bm">Bermuda</option>
+                        <option {% if request.session.country == "bt" %} selected {% endif %} value="bt">Bhutan</option>
+                        <option {% if request.session.country == "bo" %} selected {% endif %} value="bo">Bolivia</option>
+                        <option {% if request.session.country == "bq" %} selected {% endif %} value="bq">Bonaire Sint Eustatius </option>
+                        <option {% if request.session.country == "ba" %} selected {% endif %} value="ba">Bosnia and Herzegovina</option>
+                        <option {% if request.session.country == "bw" %} selected {% endif %} value="bw">Botswana</option>
+                        <option {% if request.session.country == "br" %} selected {% endif %} value="br">Brazil</option>
+                        <option {% if request.session.country == "vg" %} selected {% endif %} value="vg">British Virgin Islands</option>
+                        <option {% if request.session.country == "bn" %} selected {% endif %} value="bn">Brunei</option>
+                        <option {% if request.session.country == "bg" %} selected {% endif %} value="bg">Bulgaria</option>
+                        <option {% if request.session.country == "bi" %} selected {% endif %} value="bi">Burundi</option>
+                        <option {% if request.session.country == "kh" %} selected {% endif %} value="kh">Cambodia</option>
+                        <option {% if request.session.country == "cm" %} selected {% endif %} value="cm">Cameroon</option>
+                        <option {% if request.session.country == "ca" %} selected {% endif %} value="ca">Canada</option>
+                        <option {% if request.session.country == "cv" %} selected {% endif %} value="cv">CapeVerde</option>
+                        <option {% if request.session.country == "cf" %} selected {% endif %} value="cf">Central African Republic</option>
+                        <option {% if request.session.country == "td" %} selected {% endif %} value="td">Chad</option>
+                        <option {% if request.session.country == "cl" %} selected {% endif %} value="cl">Chile</option>
+                        <option {% if request.session.country == "cn" %} selected {% endif %} value="cn">China</option>
+                        <option {% if request.session.country == "co" %} selected {% endif %} value="co">Colombia</option>
+                        <option {% if request.session.country == "cd" %} selected {% endif %} value="cd">Congo</option>
+                        <option {% if request.session.country == "ck" %} selected {% endif %} value="ck">Cook Islands</option>
+                        <option {% if request.session.country == "cr" %} selected {% endif %} value="cr">Costa Rica</option>
+                        <option {% if request.session.country == "hr" %} selected {% endif %} value="hr">Croatia</option>
+                        <option {% if request.session.country == "cu" %} selected {% endif %} value="cu">Cuba</option>
+                        <option {% if request.session.country == "cw" %} selected {% endif %} value="cw">Curacao</option>
+                        <option {% if request.session.country == "cy" %} selected {% endif %} value="cy">Cyprus</option>
+                        <option {% if request.session.country == "cz" %} selected {% endif %} value="cz">Czechia</option>
+                        <option {% if request.session.country == "dk" %} selected {% endif %} value="dk">Denmark</option>
+                        <option {% if request.session.country == "dj" %} selected {% endif %} value="dj">Dijibouti</option>
+                        <option {% if request.session.country == "dm" %} selected {% endif %} value="dm">Dominica</option>
+                        <option {% if request.session.country == "do" %} selected {% endif %} value="do">Dominican Republic</option>
+                        <option {% if request.session.country == "tl" %} selected {% endif %} value="tl">East Timor</option>
+                        <option {% if request.session.country == "ec" %} selected {% endif %} value="ec">Ecuador</option>
+                        <option {% if request.session.country == "eg" %} selected {% endif %} value="eg">Egypt</option>
+                        <option {% if request.session.country == "sv" %} selected {% endif %} value="sv">El Salvador</option>
+                        <option {% if request.session.country == "gq" %} selected {% endif %} value="gq">Equatorial Guinea</option>
+                        <option {% if request.session.country == "ee" %} selected {% endif %} value="ee">Estonia</option>
+                        <option {% if request.session.country == "et" %} selected {% endif %} value="et">Ethiopia</option>
+                        <option {% if request.session.country == "fo" %} selected {% endif %} value="fo">Faroe Islands</option>
+                        <option {% if request.session.country == "fi" %} selected {% endif %} value="fi">Finland</option>
+                        <option {% if request.session.country == "fr" %} selected {% endif %} value="fr">France</option>
+                        <option {% if request.session.country == "gf" %} selected {% endif %} value="gf">French Guiana</option>
+                        <option {% if request.session.country == "pf" %} selected {% endif %} value="pf">French Polynesia</option>
+                        <option {% if request.session.country == "ga" %} selected {% endif %} value="ga">Gabon</option>
+                        <option {% if request.session.country == "gm" %} selected {% endif %} value="gm">Gambia</option>
+                        <option {% if request.session.country == "ge" %} selected {% endif %} value="ge">Georgia</option>
+                        <option {% if request.session.country == "de" %} selected {% endif %} value="de">Germany</option>
+                        <option {% if request.session.country == "gh" %} selected {% endif %} value="gh">Ghana</option>
+                        <option {% if request.session.country == "gi" %} selected {% endif %} value="gi">Gibraltar</option>
+                        <option {% if request.session.country == "gr" %} selected {% endif %} value="gr">Greece</option>
+                        <option {% if request.session.country == "gl" %} selected {% endif %} value="gl">Greenland</option>
+                        <option {% if request.session.country == "gd" %} selected {% endif %} value="gd">Grenada</option>
+                        <option {% if request.session.country == "gp" %} selected {% endif %} value="gp">Guadeloupe</option>
+                        <option {% if request.session.country == "gu" %} selected {% endif %} value="gu">Guam</option>
+                        <option {% if request.session.country == "gt" %} selected {% endif %} value="gt">Guatemala</option>
+                        <option {% if request.session.country == "gg" %} selected {% endif %} value="gg">Guernsey</option>
+                        <option {% if request.session.country == "gn" %} selected {% endif %} value="gn">Guinea</option>
+                        <option {% if request.session.country == "gw" %} selected {% endif %} value="gw">Guinea-Bissau</option>
+                        <option {% if request.session.country == "gy" %} selected {% endif %} value="gy">Guyana</option>
+                        <option {% if request.session.country == "ht" %} selected {% endif %} value="ht">Haiti</option>
+                        <option {% if request.session.country == "hn" %} selected {% endif %} value="hn">Honduras</option>
+                        <option {% if request.session.country == "hk" %} selected {% endif %} value="hk">Hong Kong</option>
+                        <option {% if request.session.country == "hu" %} selected {% endif %} value="hu">Hungary</option>
+                        <option {% if request.session.country == "is" %} selected {% endif %} value="is">Iceland</option>
+                        <option {% if request.session.country == "in" %} selected {% endif %} value="in">India</option>
+                        <option {% if request.session.country == "id" %} selected {% endif %} value="id">Indonesia</option>
+                        <option {% if request.session.country == "ir" %} selected {% endif %} value="ir">Iran</option>
+                        <option {% if request.session.country == "iq" %} selected {% endif %} value="iq">Iraq</option>
+                        <option {% if request.session.country == "ie" %} selected {% endif %} value="ie">Ireland</option>
+                        <option {% if request.session.country == "im" %} selected {% endif %} value="im">Isle of Man</option>
+                        <option {% if request.session.country == "il" %} selected {% endif %} value="il">Israel</option>
+                        <option {% if request.session.country == "it" %} selected {% endif %} value="it">Italy</option>
+                        <option {% if request.session.country == "jm" %} selected {% endif %} value="jm">Jamaica</option>
+                        <option {% if request.session.country == "jp" %} selected {% endif %} value="jp">Japan</option>
+                        <option {% if request.session.country == "je" %} selected {% endif %} value="je">Jersey</option>
+                        <option {% if request.session.country == "jo" %} selected {% endif %} value="jo">Jordan</option>
+                        <option {% if request.session.country == "kz" %} selected {% endif %} value="kz">Kazakhstan</option>
+                        <option {% if request.session.country == "ke" %} selected {% endif %} value="ke">Kenya</option>
+                        <option {% if request.session.country == "ki" %} selected {% endif %} value="ki">Kiribati</option>
+                        <option {% if request.session.country == "xk" %} selected {% endif %} value="xk">Kosovo</option>
+                        <option {% if request.session.country == "kw" %} selected {% endif %} value="kw">Kuwait</option>
+                        <option {% if request.session.country == "kg" %} selected {% endif %} value="kg">Kyrgyzstan</option>
+                        <option {% if request.session.country == "la" %} selected {% endif %} value="la">Laos</option>
+                        <option {% if request.session.country == "lv" %} selected {% endif %} value="lv">Latvia</option>
+                        <option {% if request.session.country == "lb" %} selected {% endif %} value="lb">Lebanon</option>
+                        <option {% if request.session.country == "ls" %} selected {% endif %} value="ls">Lesotho</option>
+                        <option {% if request.session.country == "lr" %} selected {% endif %} value="lr">Liberia</option>
+                        <option {% if request.session.country == "ly" %} selected {% endif %} value="ly">Libya</option>
+                        <option {% if request.session.country == "li" %} selected {% endif %} value="li">Liechtenstein</option>
+                        <option {% if request.session.country == "lt" %} selected {% endif %} value="lt">Lithuania</option>
+                        <option {% if request.session.country == "lu" %} selected {% endif %} value="lu">Luxembourg</option>
+                        <option {% if request.session.country == "mk" %} selected {% endif %} value="mk">Macedonia</option>
+                        <option {% if request.session.country == "mg" %} selected {% endif %} value="mg">Madagascar</option>
+                        <option {% if request.session.country == "mw" %} selected {% endif %} value="mw">Malawi</option>
+                        <option {% if request.session.country == "my" %} selected {% endif %} value="my">Malaysia</option>
+                        <option {% if request.session.country == "mv" %} selected {% endif %} value="mv">Maldives</option>
+                        <option {% if request.session.country == "ml" %} selected {% endif %} value="ml">Mali</option>
+                        <option {% if request.session.country == "mt" %} selected {% endif %} value="mt">Malta</option>
+                        <option {% if request.session.country == "mh" %} selected {% endif %} value="mh">Marshall Islands</option>
+                        <option {% if request.session.country == "mq" %} selected {% endif %} value="mq">Martinique</option>
+                        <option {% if request.session.country == "mr" %} selected {% endif %} value="mr">Mauritania</option>
+                        <option {% if request.session.country == "mu" %} selected {% endif %} value="mu">Mauritius</option>
+                        <option {% if request.session.country == "mx" %} selected {% endif %} value="mx">Mexico</option>
+                        <option {% if request.session.country == "md" %} selected {% endif %} value="md">Moldova</option>
+                        <option {% if request.session.country == "mc" %} selected {% endif %} value="mc">Monaco</option>
+                        <option {% if request.session.country == "mn" %} selected {% endif %} value="mn">Mongolia</option>
+                        <option {% if request.session.country == "ma" %} selected {% endif %} value="ma">Morocco</option>
+                        <option {% if request.session.country == "mz" %} selected {% endif %} value="mz">Mozambique</option>
+                        <option {% if request.session.country == "mm" %} selected {% endif %} value="mm">Myanmar</option>
+                        <option {% if request.session.country == "na" %} selected {% endif %} value="na">Namibia</option>
+                        <option {% if request.session.country == "np" %} selected {% endif %} value="np">Nepal</option>
+                        <option {% if request.session.country == "nl" %} selected {% endif %} value="nl">Netherlands</option>
+                        <option {% if request.session.country == "nz" %} selected {% endif %} value="nz">New Zealand</option>
+                        <option {% if request.session.country == "ni" %} selected {% endif %} value="ni">Nicaragua</option>
+                        <option {% if request.session.country == "ng" %} selected {% endif %} value="ng">Nigeria</option>
+                        <option {% if request.session.country == "nu" %} selected {% endif %} value="nu">Niue</option>
+                        <option {% if request.session.country == "nf" %} selected {% endif %} value="nf">Norfolk Island</option>
+                        <option {% if request.session.country == "kp" %} selected {% endif %} value="kp">North Korea</option>
+                        <option {% if request.session.country == "mp" %} selected {% endif %} value="mp">Northern Mariana Islands</option>
+                        <option {% if request.session.country == "no" %} selected {% endif %} value="no">Norway</option>
+                        <option {% if request.session.country == "om" %} selected {% endif %} value="om">Oman</option>
+                        <option {% if request.session.country == "pk" %} selected {% endif %} value="pk">Pakistan</option>
+                        <option {% if request.session.country == "pw" %} selected {% endif %} value="pw">Palau</option>
+                        <option {% if request.session.country == "pa" %} selected {% endif %} value="pa">Panama</option>
+                        <option {% if request.session.country == "py" %} selected {% endif %} value="py">Paraguay</option>
+                        <option {% if request.session.country == "pe" %} selected {% endif %} value="pe">Peru</option>
+                        <option {% if request.session.country == "ph" %} selected {% endif %} value="ph">Philippines</option>
+                        <option {% if request.session.country == "pl" %} selected {% endif %} value="pl">Poland</option>
+                        <option {% if request.session.country == "pt" %} selected {% endif %} value="pt">Portugal</option>
+                        <option {% if request.session.country == "pr" %} selected {% endif %} value="pr">Puerto Rico</option>
+                        <option {% if request.session.country == "qa" %} selected {% endif %} value="qa">Qatar</option>
+                        <option {% if request.session.country == "cg" %} selected {% endif %} value="cg">Republic of the Congo</option>
+                        <option {% if request.session.country == "re" %} selected {% endif %} value="re">Reunion</option>
+                        <option {% if request.session.country == "ro" %} selected {% endif %} value="ro">Romania</option>
+                        <option {% if request.session.country == "ru" %} selected {% endif %} value="ru">Russia</option>
+                        <option {% if request.session.country == "rw" %} selected {% endif %} value="rw">Rwanda</option>
+                        <option {% if request.session.country == "bl" %} selected {% endif %} value="bl">Saint Barthelemy</option>
+                        <option {% if request.session.country == "sh" %} selected {% endif %} value="sh">Saint Helena</option>
+                        <option {% if request.session.country == "kn" %} selected {% endif %} value="kn">Saint Kitts and Nevis</option>
+                        <option {% if request.session.country == "lc" %} selected {% endif %} value="lc">Saint Lucia</option>
+                        <option {% if request.session.country == "vc" %} selected {% endif %} value="vc">Saint Vincent and </option>
+                        <option {% if request.session.country == "ws" %} selected {% endif %} value="ws">Samoa</option>
+                        <option {% if request.session.country == "sm" %} selected {% endif %} value="sm">San Marino</option>
+                        <option {% if request.session.country == "sa" %} selected {% endif %} value="sa">Saudi Arabia</option>
+                        <option {% if request.session.country == "sn" %} selected {% endif %} value="sn">Senegal</option>
+                        <option {% if request.session.country == "rs" %} selected {% endif %} value="rs">Serbia</option>
+                        <option {% if request.session.country == "sc" %} selected {% endif %} value="sc">Seychelles</option>
+                        <option {% if request.session.country == "sl" %} selected {% endif %} value="sl">Sierra Leone</option>
+                        <option {% if request.session.country == "sg" %} selected {% endif %} value="sg">Singapore</option>
+                        <option {% if request.session.country == "sx" %} selected {% endif %} value="sx">Sint Maarten</option>
+                        <option {% if request.session.country == "sk" %} selected {% endif %} value="sk">Slovakia</option>
+                        <option {% if request.session.country == "si" %} selected {% endif %} value="si">Slovenia</option>
+                        <option {% if request.session.country == "sb" %} selected {% endif %} value="sb">Solomon Islands</option>
+                        <option {% if request.session.country == "so" %} selected {% endif %} value="so">Somalia</option>
+                        <option {% if request.session.country == "za" %} selected {% endif %} value="za">South Africa</option>
+                        <option {% if request.session.country == "kr" %} selected {% endif %} value="kr">South Korea</option>
+                        <option {% if request.session.country == "ss" %} selected {% endif %} value="ss">South Sudan</option>
+                        <option {% if request.session.country == "es" %} selected {% endif %} value="es">Spain</option>
+                        <option {% if request.session.country == "lk" %} selected {% endif %} value="lk">Sri Lanka</option>
+                        <option {% if request.session.country == "sd" %} selected {% endif %} value="sd">Sudan</option>
+                        <option {% if request.session.country == "se" %} selected {% endif %} value="se">Sweden</option>
+                        <option {% if request.session.country == "ch" %} selected {% endif %} value="ch">Switzerland</option>
+                        <option {% if request.session.country == "sy" %} selected {% endif %} value="sy">Syria</option>
+                        <option {% if request.session.country == "tw" %} selected {% endif %} value="tw">Taiwan</option>
+                        <option {% if request.session.country == "tj" %} selected {% endif %} value="tj">Tajikistan</option>
+                        <option {% if request.session.country == "tz" %} selected {% endif %} value="tz">Tanzania</option>
+                        <option {% if request.session.country == "th" %} selected {% endif %} value="th">Thailand</option>
+                        <option {% if request.session.country == "tg" %} selected {% endif %} value="tg">Togo</option>
+                        <option {% if request.session.country == "tk" %} selected {% endif %} value="tk">Tokelau</option>
+                        <option {% if request.session.country == "to" %} selected {% endif %} value="to">Tonga</option>
+                        <option {% if request.session.country == "tt" %} selected {% endif %} value="tt">Trinidad and Tobago</option>
+                        <option {% if request.session.country == "tn" %} selected {% endif %} value="tn">Tunisia</option>
+                        <option {% if request.session.country == "tr" %} selected {% endif %} value="tr">Turkey</option>
+                        <option {% if request.session.country == "tm" %} selected {% endif %} value="tm">Turkmenistan</option>
+                        <option {% if request.session.country == "tv" %} selected {% endif %} value="tv">Tuvalu</option>
+                        <option {% if request.session.country == "vi" %} selected {% endif %} value="vi">U.S. Virgin Islands</option>
+                        <option {% if request.session.country == "ug" %} selected {% endif %} value="ug">Uganda</option>
+                        <option {% if request.session.country == "ua" %} selected {% endif %} value="ua">Ukraine</option>
+                        <option {% if request.session.country == "ae" %} selected {% endif %} value="ae">United Arab Emirates</option>
+                        <option {% if request.session.country == "gb" %} selected {% endif %} value="gb">United Kingdom</option>
+                        <option {% if request.session.country == "us" %} selected {% endif %} value="us">United States</option>
+                        <option {% if request.session.country == "uy" %} selected {% endif %} value="uy">Uruguay</option>
+                        <option {% if request.session.country == "uz" %} selected {% endif %} value="uz">Uzbekistan</option>
+                        <option {% if request.session.country == "ve" %} selected {% endif %} value="ve">Venezuela</option>
+                        <option {% if request.session.country == "vn" %} selected {% endif %} value="vn">Vietnam</option>
+                        <option {% if request.session.country == "ye" %} selected {% endif %} value="ye">Yemen</option>
+                        <option {% if request.session.country == "zm" %} selected {% endif %} value="zm">Zambia</option>
+                        <option {% if request.session.country == "zw" %} selected {% endif %} value="zw">Zimbabwe</option>
+                      </select>
+                    </div>
+                    <div class="single-footer-widget mb-30">
+                      <h3>Enquiry Form</h3>
+                      <form action="{% url 'home.acknowledgement' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="text" name="name" id="name" class="form-control"
+                              placeholder="Your Name">
+                              <input type="hidden" name="contactus" value="00">
+                              <input type="hidden" name="subject" value="Ulearn - Footer Contact Form">
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="email" name="email" id="email" class="form-control" placeholder="Your Email">
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="text" name="phone" id="phone_number" class="form-control" placeholder="Your Phone">
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="text" name="city" id="city" class="form-control" placeholder="Your city">
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="text" name="country" id="phone_number" class="form-control" placeholder="Your country">
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-12">
+                            <div class="form-group pb-2">
+                              <input type="text" name="course" id="city" class="form-control" placeholder="Your course">
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12">
+                            <div class="form-group pb-2">
+                              <textarea name="message" class="form-control" id="message" cols="30" rows="3" placeholder="Your Message"></textarea>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="default-btn"><span class="label">Send Message</span></button>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+
+              <div class="go-top"><i class='bx bx-up-arrow-alt'></i></div>
+              <script src="{% static 'cpt/js/jquery.min.js' %}"></script>
+              <script src="{% static 'cpt/js/popper.min.js' %}"></script>
+              <script src="{% static 'cpt/js/bootstrap.min.js' %}"></script>
+              <script src="{% static 'cpt/js/owl.carousel.min.js' %}"></script>
+              <script src="{% static 'cpt/js/mixitup.min.js' %}"></script>
+              <script src="{% static 'cpt/js/parallax.min.js' %}"></script>
+              <script src="{% static 'cpt/js/jquery.appear.min.js' %}"></script>
+              <script src="{% static 'cpt/js/odometer.min.js' %}"></script>
+              <script src="{% static 'cpt/js/particles.min.js' %}"></script>
+              <script src="{% static 'cpt/js/meanmenu.min.js' %}"></script>
+              <script src="{% static 'cpt/js/jquery.nice-select.min.js' %}"></script>
+              <script src="{% static 'cpt/js/viewer.min.js' %}"></script>
+              <script src="{% static 'cpt/js/slick.min.js' %}"></script>
+              <script src="{% static 'cpt/js/jquery.magnific-popup.min.js' %}"></script>
+              <script src="{% static 'cpt/js/jquery.ajaxchimp.min.js' %}"></script>
+              <script src="{% static 'cpt/js/form-validator.min.js' %}"></script>
+              <script src="{% static 'cpt/js/contact-form-script.js' %}"></script>
+              <script src="{% static 'cpt/js/main.js' %}"></script>
+
+              <script src="{% static 'cpt/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+              <script src="{% static 'cpt/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+              <script src="{% static 'cpt/js/rev-slider-custom.js' %}"></script>
+              <script src="{% static 'cpt/js/extra.js' %}"></script>
+              {% block script %}
+              {% endblock %}
+              <script type="text/javascript">
+              $(document).ready(function(){
+                $("select.form-select").css("display","initial");
+                $(".nice-select.mycitylist").hide();
+                $(".nice-select.mycountrylist").hide();
+                $("#CitySelect").append(new Option("Select City",""))
+                $.get("{% url 'CityDetail' %}?q={{ request.session.country }}", function(data, status){
+                  for (let i = 0; i < data.length; i++) {
+                    $("#CitySelect").append(new Option(data[i][0],data[i][0]))
+                  }
+                });
+                $("#CitySelectContact").append(new Option("Select City",""))
+                $("#CountrySelectContact").change(function () {
+                  $('#CitySelectContact')
+                  .find('option')
+                  .remove()
+                  .end();
+                  $.get("{% url 'CityDetail' %}?q="+$(this).val(), function(data, status){
+                    for (let i = 0; i < data.length; i++) {
+                      $("#CitySelectContact").append(new Option(data[i][0],data[i][0]))
+                    }
+                  });
+                });
+                $("#CourseSelectContact").append(new Option("Select Course",""))
+                $.get("{% url 'CourselistJson' %}", function(data, status){
+                  for (let i = 0; i < data.length; i++) {
+                    $("#CourseSelectContact").append(new Option(data[i][0],data[i][0]))
+                  }
+                });
+                {% if request.session.city %}
+                function show_popup(){
+                  $("#CitySelect option[value={{request.session.city }}]").attr('selected','selected')
+                };
+                window.setTimeout(show_popup, 3000);
+                {% endif %}
+              });
+              </script>
+            </body>
+            </html>
+<!--  -->

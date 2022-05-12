@@ -1,0 +1,192 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+{% load static %}
+<link href="{% static 'quix/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<!-- Page plugins css -->
+<link href="{% static 'quix/plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+<!-- Color picker plugins css -->
+<link href="{% static 'quix/plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+<!-- Date picker plugins css -->
+<link href="{% static 'quix/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<!-- Daterange picker plugins css -->
+<link href="{% static 'quix/plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'quix/plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+
+<h1>Add Training</h1>
+<div class="basic-form">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Select category</label>
+      <select class="form-control" id="sel1" name="selecting_category">
+        <option value="">Select category</option>
+        <option>Project management</option>
+        <option>Agile & Scrum</option>
+        <option>IT Service Management</option>
+        <option>Quality Management</option>
+      </select>
+      {% if form.is_valid == False%}
+      {% if form.category.errors %}
+      <span class="helper-text">{{ form.category.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type="text" name="course_type" class="form-control" placeholder="Course Type" value="{% if form.is_valid == False %}{{form.course_type.value }}{% endif %}">
+      {% if form.is_valid == False%}
+      {% if form.course_type.errors %}
+      <span class="helper-text">{{ form.course_type.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type="text" name="course_name" class="form-control" placeholder="Course Name" value="{% if form.is_valid == False %}{{form.course_name.value }}{% endif %}">
+      {% if form.is_valid == False%}
+      {% if form.course_name.errors %}
+      <span class="helper-text">{{ form.course_name.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type="text" name="slug" class="form-control" placeholder="Slug" value="{% if form.is_valid == False %}{{form.slug.value }}{% endif %}">
+      {% if form.is_valid == False%}
+      {% if form.slug.errors %}
+      <span class="helper-text">{{ form.slug.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type="text" name="h1_name" class="form-control" placeholder="H1 Name" value="{% if form.is_valid == False %}{{form.h1_name.value }}{% endif %}">
+      {% if form.is_valid == False%}
+      {% if form.h1_name.errors %}
+      <span class="helper-text">{{ form.h1_name.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <input type="text" name="fee" class="form-control" placeholder="Fee" value="{% if form.is_valid == False %}{{form.fee.value }}{% endif %}">
+      {% if form.is_valid == False%}
+      {% if form.fee.errors %}
+      <span class="helper-text">{{ form.fee.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea name="course_description" class="form-control summernote" placeholder="Course Description" >{% if form.is_valid == False %}{{form.course_description.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.course_description.errors %}
+      <span class="helper-text">{{ form.course_description.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea  name="course_key_features" class="form-control summernote" placeholder="Course Key Features" >{% if form.is_valid == False %}{{form.course_key_features.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.course_key_features.errors %}
+      <span class="helper-text">{{ form.course_key_features.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea  name="what_you_learn" class="form-control summernote" placeholder="what you learn" >{% if form.is_valid == False %}{{form.what_you_learn.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.what_you_learn.errors %}
+      <span class="helper-text">{{ form.what_you_learn.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea name="course_syllabus" class="form-control summernote" placeholder="Course Syllabus">{% if form.is_valid == False %}{{form.course_syllabus.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.course_syllabus.errors %}
+      <span class="helper-text">{{ form.course_syllabus.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea name="meta_title" class="form-control" placeholder="Meta Title ">{% if form.is_valid == False %}{{form.meta_title.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_title.errors %}
+      <span class="helper-text">{{ meta_title.meta_title.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea  name="meta_description" class="form-control" placeholder="Meta Description " >{% if form.is_valid == False %}{{form.meta_description.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_description.errors %}
+      <span class="helper-text">{{ form.meta_description.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <textarea  name="meta_keywords" class="form-control" placeholder="Meta Keywords" >{% if form.is_valid == False %}{{form.meta_keywords.value }}{% endif %}</textarea>
+      {% if form.is_valid == False%}
+      {% if form.meta_keywords.errors %}
+      <span class="helper-text">{{ form.meta_keywords.errors }}</span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="basic-form">
+      <div class="form-group">
+        <input type="file" name="course_picture" class="form-control-file" placeholder="course_picture" />
+        {% if form.is_valid == False%}
+        {% if form.course_picture.errors %}
+        <span class="helper-text">{{ form.course_picture.errors }}</span>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-auto my-1">
+      <div class="custom-control custom-checkbox mr-sm-2"></div>
+      <input class="custom-control-input" type="checkbox" placeholder="mark_popular" name="mark_popular" id="mark_popular"></input>
+      <label class="custom-control-label" for="mark_popular">Mark as popular</label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-dark mb-2" type="submit">Post</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% load static%}
+
+<script src="{% static 'quix/plugins/moment/moment.js' %}"></script>
+<script src="{% static 'quix/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+<!-- Clock Plugin JavaScript -->
+<script src="{% static 'quix/plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+<!-- Color Picker Plugin JavaScript -->
+<script src="{% static 'quix/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+<script src="{% static 'quix/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+<script src="{% static 'quix/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+<!-- Date Picker Plugin JavaScript -->
+<script src="{% static 'quix/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+<!-- Date range Plugin JavaScript -->
+<script src="{% static 'quix/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'quix/plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+
+<script src="{% static 'quix/js/plugins-init/form-pickers-init.js' %}"></script>
+<script>
+  $(document).ready(function(){
+    $('select').selectpicker();
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.summernote').summernote();
+  });
+</script>
+{% endblock %}

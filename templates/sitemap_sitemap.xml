@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+{% spaceless %}
+{% for url in countrylist %}
+  <url>
+    <loc>{{ request.scheme }}://{{ request.META.HTTP_HOST }}/{{url.country_code}}/{{ url.country_name | lower}}-sitemap.xml</loc>
+    <lastmod>{{ lastmod|date:"Y-m-d" }}</lastmod>
+    <changefreq>{{ changefreq }}</changefreq>
+    <priority>{{ priority }}</priority>
+  </url>
+{% endfor %}
+{% endspaceless %}
+</urlset>

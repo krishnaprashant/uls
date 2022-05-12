@@ -1,0 +1,85 @@
+{% extends 'cpanel.html' %}
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load poll_extras %}
+
+{% for msg in messages %}
+   {% if msg.tags == 'success' %}
+   <p class="bg-success text-white p-2">{{msg}}</p>
+   {% else %}
+   <p class="bg-danger text-white p-2">{{msg}}</p>
+   {% endif %}
+{% endfor %}
+
+
+<h3>Custom Content</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered zero-configuration">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>url</th>
+        <th>Content</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in content%}
+      <tr>
+        <td>{{c.id}}</td>
+        <td>{{c.url}}</td>
+        <td><div class="wrap-text">{{c.content | changeEncoding }}</div></td>
+        <td><a href="{% url 'cpanel.UpdateCustomContent' %}?id={{c.id}}">update</a></td>
+        <td><a href="javascript:void(0)" onclick="deleteCourse('{% url 'cpanel.DeleteCustomContent' %}?id={{c.id}}')">delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Id</th>
+        <th>url</th>
+        <th>Content</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+{% endblock %}
+{% block script %}
+
+<script src="{% static 'admin/sweet/sweetalert/dist/sweetalert.min.js' %}"></script>
+
+<script type="text/javascript">
+  function deleteCourse(url) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Content details",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your Content has been deleted!", {
+          icon: "success",
+        });
+        setTimeout(function(){
+          window.location.href = url;
+        },2000);
+      } else {
+        swal("Your Contentis safe!");
+      }
+    });
+  }
+  </script>
+{% endblock %}
